@@ -39,4 +39,4 @@ async def get_response(data: dict):
         raise HTTPException(detail="File not found.", status_code=status.HTTP_404_NOT_FOUND)
     
 if __name__ == "__main__":
-    uvicorn.run(app, host='localhost', port=1237)
+    uvicorn.run(app, host='127.0.0.1', port=1237)
