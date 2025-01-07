@@ -8,7 +8,7 @@ import time
 def chat_llm(input):
     for chunk in chain.invoke(input):
         yield str(chunk)
-        print(chunk)
+        # print(chunk)
         history[-1]['assistant'] += chunk
 
 def chat_llm2(input):
