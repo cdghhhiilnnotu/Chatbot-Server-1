@@ -1,0 +1,6 @@
+from modules.extractings.base import BaseExtractor
+from modules.extractings.pdf_extracting import PDFExtractor
+from modules.extractings.csv_extracting import CSVExtractor
+from modules.extractings.txt_extracting import TXTExtractor
+from modules.extractings.docx_extracting import DOCXExtractor
+from modules.extractings.html_extracting import HTMLExtractor
