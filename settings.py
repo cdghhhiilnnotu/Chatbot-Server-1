@@ -7,10 +7,10 @@ from typing import Generator
 from modules.function_calls import ToolCalling, function_tools
 from modules.routers import SemanticRouter, Route, specials, chitchats
 from modules.embeddings import HFEmbedding
-from modules.configs import LLM_NAME
+from modules.configs import LLM_NAME, save_json, load_json, update_chat_data
 from modules.rags import FAISSRag
 from modules.storings import FAISSDatabase
-from modules.tools import course_fix, course_cancel
+from modules.tools import course_fix, course_cancel, search_schedule
 
 model = OllamaLLM(model=LLM_NAME)
 
@@ -21,14 +21,12 @@ semanticRouter = SemanticRouter(modelEmbeding, routes=[specialRoute, chitchatRou
 
 vector_store = FAISSDatabase(modelEmbeding, './sources/database/faiss/v0')
 rag = FAISSRag(vector_store)
-
 history = []
 
 @tool
 def converse(query: str) -> str:
     "Trả lời cuộc hội thoại theo ngôn ngữ tự nhiên"
     print("converse")
-
     guidedRoute = semanticRouter.guide(query)[1]
     if guidedRoute == 'specials':
         print("Guide to RAGs")
@@ -46,20 +44,22 @@ def converse(query: str) -> str:
 function_tools.append(converse)
 function_tools.append(course_fix)
 function_tools.append(course_cancel)
+function_tools.append(search_schedule)
 
 toolcall = ToolCalling(function_tools)
 tool_render = toolcall.render()
 
 
 system_prompt = f"""
-Bạn là trợ lý ngôn ngữ tự nhiên có tên là AIMAGE.
-Dựa vào câu hỏi đầu vào của người dùng, trả về tên và đầu vào của công cụ cần sử dụng
-dưới dạng JSON với keys là 'name' và 'arguments'
-Value của 'name' là tên công cụ cần sử dụng
-Value của 'arguments' là 1 dictionary các tham số đầu vào của công cụ.
+Dựa vào câu hỏi đầu vào của người dùng, 
+trả về dưới dạng JSON với
+key 'name' là tên công cụ
+value 'arguments' là 1 dictionary các tham số đầu vào.
 Hãy sử dụng các công cụ sau đây:
 {tool_render}
-Trả lời câu hỏi ngắn gọn nhất có thể.
+Trả lời câu hỏi ngắn gọn nhất có thể. Nếu không thể trả lời được câu hỏi hãy nói rằng không biết.
+Hãy nhớ, bạn là trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội trong việc hỗ trợ trả lời các câu hỏi của sinh viên.
+Tên bạn là AIMAGE, hãy nhớ điều đó.
 """
 
 prompt = ChatPromptTemplate.from_messages(
@@ -67,3 +67,14 @@ prompt = ChatPromptTemplate.from_messages(
 )
 
 chain = prompt | model | JsonOutputParser() | toolcall.chain
+
+def chat(data):
+    update_chat_data("chats.json", data)
+    global history 
+    history = data['history']
+    # print(data)
+    for chunk in chain.invoke(data['query']):
+        yield str(chunk)
+    data['history'] = history
+    update_chat_data("chats.json", data)
+    

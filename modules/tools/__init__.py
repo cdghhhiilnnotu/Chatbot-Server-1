@@ -1,1 +1,2 @@
-from modules.tools.course_fixing import *
+from modules.tools.course import *
+from modules.tools.schedule import *

@@ -9,7 +9,7 @@ from modules.extractings import BaseExtractor
 
 class TXTExtractor(BaseExtractor):
     def __init__(self):
-        super().__init__()
+        super().__init__('TXTExtractor')
 
     def load(self, txt_path):
         try:

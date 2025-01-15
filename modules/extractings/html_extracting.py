@@ -11,7 +11,7 @@ from modules.extractings import BaseExtractor
 
 class HTMLExtractor(BaseExtractor):
     def __init__(self):
-        super().__init__()
+        super().__init__('HTMLExtractor')
 
     def load(self, html_path):
         try:

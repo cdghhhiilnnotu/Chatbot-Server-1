@@ -1,1 +1,0 @@
-from modules.tools.course_fixing.tool import *

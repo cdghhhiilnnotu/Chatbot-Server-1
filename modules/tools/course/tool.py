@@ -1,14 +1,14 @@
-from modules.tools.course_fixing.utils import *
+from modules.tools.course.utils import *
 from langchain_core.tools import tool
 import sys
-sys.path.append('./modules/tools/course_fixing')
+sys.path.append('./modules/tools/course')
 
 @tool
 def course_fix(msv: str, maTC: str):
     # "Cancel or Add course has maTC to student has msv"
     "Thay đổi học phần có mã tín chỉ maTC vào thời khóa biểu của sinh viên có mã sinh viên msv"
-    tkb = TKB(f'./modules/tools/course_fixing/schedules/{msv}.csv')
-    hp = MonHoc(f'./modules/tools/course_fixing/courses/{maTC}.csv')
+    tkb = TKB(f'./modules/tools/course/schedules/{msv}.csv')
+    hp = MonHoc(f'./modules/tools/course/courses/{maTC}.csv')
 
     try:
         tkb.delete_content(maTC)
@@ -32,7 +32,7 @@ def course_fix(msv: str, maTC: str):
 def course_cancel(msv: str, maTC: str):
     # "Cancel or Add course has maTC to student has msv"
     "Hủy học phần có mã tín chỉ maTC vào thời khóa biểu của sinh viên có mã sinh viên msv"
-    tkb = TKB(f'./modules/tools/course_fixing/schedules/{msv}.csv')
+    tkb = TKB(f'./modules/tools/course/schedules/{msv}.csv')
 
     try:
         tkb.delete_content(maTC)

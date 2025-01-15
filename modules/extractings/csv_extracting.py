@@ -10,7 +10,7 @@ from modules.extractings import BaseExtractor
 
 class CSVExtractor(BaseExtractor):
     def __init__(self):
-        super().__init__()
+        super().__init__('CSVExtractor')
 
     def load(self, csv_path):
         try:
