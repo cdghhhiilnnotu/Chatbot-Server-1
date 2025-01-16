@@ -1,1 +1,107 @@
-{}
+{
+    "2055010051": {
+        "3nAzHedd6J": {
+            "createdAt": "2025-01-10 02:07:37",
+            "messages": [
+                {
+                    "type": "user",
+                    "text": "xin chaof"
+                },
+                {
+                    "type": "server",
+                    "text": "[Error]: \"Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON\""
+                },
+                {
+                    "type": "user",
+                    "text": "ban khong co ket noi a"
+                },
+                {
+                    "type": "server",
+                    "text": "[Error]: \"Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON\""
+                },
+                {
+                    "type": "user",
+                    "text": "oi mai got"
+                },
+                {
+                    "type": "server",
+                    "text": "[Error]: \"Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON\""
+                },
+                {
+                    "type": "user",
+                    "text": "chào bạn"
+                },
+                {
+                    "type": "server",
+                    "text": "Chào! Bạn muốn trò chuyện về điều gì?"
+                },
+                {
+                    "type": "user",
+                    "text": "tên tôi dương"
+                },
+                {
+                    "type": "server",
+                    "text": ""
+                }
+            ]
+        },
+        "CrKWqiilKs": {
+            "createdAt": "2025-01-10 19:40:54",
+            "messages": []
+        }
+    },
+    "2055010153": {
+        "wCXUdgg4HX": {
+            "createdAt": "2025-01-12 20:34:33",
+            "messages": [
+                {
+                    "type": "user",
+                    "text": "chào bạn tôi tên là Dương"
+                },
+                {
+                    "type": "server",
+                    "text": "[Error]: \"Unexpected token '<', \"<!DOCTYPE \"... is not valid JSON\""
+                },
+                {
+                    "type": "user",
+                    "text": "tên tôi là gì?"
+                },
+                {
+                    "type": "server",
+                    "text": "Tên của bạn là Dương."
+                },
+                {
+                    "type": "user",
+                    "text": "tôi muốn hủy học phần có mã tín chỉ TH4309 cho sinh viên có mã sinh viên 2055010051"
+                },
+                {
+                    "type": "server",
+                    "text": "Cập nhật lịch học thành công!"
+                }
+            ]
+        }
+    },
+    "2051010032": {
+        "BL0NoF8rV5": {
+            "createdAt": "2025-01-12 21:21:57",
+            "messages": [
+                {
+                    "type": "user",
+                    "text": "chào bạn"
+                },
+                {
+                    "type": "server",
+                    "text": "Chào bạn! Tôi sẵn sàng giúp đỡ. Bạn muốn nói về điều gì?"
+                },
+                {
+                    "type": "user",
+                    "text": "tôi tên là gì?"
+                },
+                {
+                    "type": "server",
+                    "text": ""
+                }
+            ]
+        }
+    }
+}

@@ -4,7 +4,6 @@ sys.path.append('../../../demo-5')
 import os
 import docx
 from docx.oxml.ns import qn
-from win32com import client
 from langchain_core.documents import Document
 from docx.opc.constants import RELATIONSHIP_TYPE
 
