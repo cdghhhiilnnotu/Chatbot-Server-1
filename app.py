@@ -3,12 +3,8 @@ import json
 import pandas as pd
 from datetime import datetime
 import faiss
-import numpy as np
 import os
-import PyPDF2
 from copy import deepcopy
-from bs4 import BeautifulSoup
-import docx
 from modules.extractings import PDFExtractor, HTMLExtractor, DOCXExtractor, TXTExtractor
 from modules.chunkings import SemanticChunk
 from modules.embeddings import HFEmbedding
@@ -63,32 +59,6 @@ def load_faiss_index():
     except Exception as e:
         st.error(f"Error loading FAISS index: {e}")
         return faiss.IndexFlatL2(VECTOR_DIMENSION)
-
-def create_dummy_vector(dimension):
-    """Create a dummy vector with the correct dimension"""
-    return np.random.rand(1, dimension).astype('float32')
-
-def get_docx_content(file_path):
-    doc = docx.Document(file_path)
-    full_text = []
-    for para in doc.paragraphs:
-        full_text.append(para.text)
-    return '\n'.join(full_text)
-
-def get_file_content(file_path, file_type):
-    content = ""
-    if file_type == "pdf":
-        with open(file_path, 'rb') as file:
-            pdf_reader = PyPDF2.PdfReader(file)
-            for page in pdf_reader.pages:
-                content += page.extract_text()
-    elif file_type == "html":
-        with open(file_path, 'r', encoding='utf-8') as file:
-            soup = BeautifulSoup(file.read(), 'html.parser')
-            content = soup.get_text()
-    elif file_type == "docx":
-        content = get_docx_content(file_path)
-    return content
 
 def save_faiss_index(index):
     faiss_files = [f for f in os.listdir(faiss_dir) if f.endswith('.faiss')]

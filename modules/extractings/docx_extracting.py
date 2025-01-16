@@ -20,16 +20,6 @@ class DOCXExtractor(BaseExtractor):
         }
 
     def convert_doc_to_docx(self, doc_path):
-        try:
-            word = client.Dispatch("Word.Application")
-            doc = word.Documents.Open(doc_path)
-            docx_path = doc_path + "x"
-            doc.SaveAs(docx_path, FileFormat=16)  # Save as .docx
-            doc.Close()
-            word.Quit()
-            return docx_path
-        except Exception as e:
-            print(f"Error converting {doc_path} to .docx: {e}")
             return None
 
     def load(self, docx_path):
