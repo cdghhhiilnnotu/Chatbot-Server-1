@@ -47,7 +47,7 @@ def get_chunk_from_dir(dir_name, sub_dirs):
         pickle.dump(chunks, file)
 
     embedding = HFEmbedding()
-    vdb = FAISSDatabase(embedding, './database/faiss/v1')
+    vdb = FAISSDatabase(embedding, './database/faiss/v2')
 
     db = vdb.db_create(chunks=chunks)
     # extractor = PDFExtractor()

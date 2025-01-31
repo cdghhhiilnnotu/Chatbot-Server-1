@@ -2,8 +2,6 @@ from starlette.responses import StreamingResponse
 from fastapi import status, HTTPException, FastAPI, Body
 import uvicorn
 from settings import get_response
-import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 app = FastAPI()
 

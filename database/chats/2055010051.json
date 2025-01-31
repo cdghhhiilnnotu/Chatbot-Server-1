@@ -1,0 +1,17 @@
+{
+    "123": {
+        "createdAt": "2025-02-01 03:34:54",
+        "messages": [
+            {
+                "type": "User",
+                "text": "Chào bạn, tôi tên là Dương, tên bạn là gì?",
+                "chat_at": "2025-02-01 03:34:54"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Tôi nhớ được! Tên của bạn là Dương.",
+                "chat_at": "2025-02-01 03:36:07"
+            }
+        ]
+    }
+}

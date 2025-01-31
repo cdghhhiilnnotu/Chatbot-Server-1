@@ -18,7 +18,7 @@ class HAUChat:
     def add_message(self, sender: str, content: str):
         # Add timestamp for each message
         chat_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        self.messages.append({"sender": sender, "content": content, "chat_at": chat_at})
+        self.messages.append({"type": sender, "text": content, "chat_at": chat_at})
 
     def to_dict(self) -> Dict:
         return {

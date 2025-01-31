@@ -1,7 +1,8 @@
 from langchain_core.tools import tool
 
 from modals import TKB
-from modules.configs import sub_chain, SCHEDULES_PATH
+from modules.configs import SCHEDULES_PATH
+from processing import sub_chain
 
 @tool
 def search_schedule(msv: str, date_to_search: str):

@@ -1,18 +1,26 @@
 import streamlit as st
-import threading
 import json
 from datetime import datetime
 import os
 from copy import deepcopy
+import time
+
+from modules.configs import FAISS_PATH
 from modules.extractings import PDFExtractor, HTMLExtractor, DOCXExtractor, TXTExtractor
 from modules.chunkings import SemanticChunk
 from modules.embeddings import HFEmbedding
 from modules.storings import FAISSDatabase
-import time
 
-docs_dir = "sources/working"
-faiss_dir = "./sources/database/faiss/v0_1"
-VECTOR_DIMENSION = 768  # Standard dimension for many embedding models
+ # Initialize chunks list in session state
+if "chunks" not in st.session_state:
+    st.session_state.chunks = []
+
+# Initialize delete state
+if "delete_index" not in st.session_state:
+    st.session_state.delete_index = None
+
+if "updated_rag" not in st.session_state:
+    st.session_state.updated_rag = False
 
 def load_chat_history(folder_path="database/chats"):
     try:
@@ -30,20 +38,20 @@ def load_chat_history(folder_path="database/chats"):
         print(e)
         return {}
 
-def display_chat_messages(messages, max_height=300):
+def display_chat_messages(messages):
     # Create a container with scrollbar
     
     for msg in messages:
-        if msg["sender"].lower() == "user":
+        if msg["type"].lower() == "user":
             col1, col2 = st.columns([0.7, 0.3])
             with col1:
-                st.write("👤 User:", msg["content"])
+                st.write("👤 User:", msg["text"])
             with col2:
                 st.write(msg["chat_at"])
         else:
             col1, col2 = st.columns([0.7, 0.3])
             with col1:
-                st.write("🤖 Server:", msg["content"])
+                st.write("🤖 Server:", msg["text"])
             with col2:
                 st.write(msg["chat_at"])
     
@@ -55,6 +63,11 @@ def filter_chats_by_date(chat_data, start_date, end_date):
         if start_date <= chat_date.date() <= end_date:
             filtered_chats[chat_id] = chat_info
     return filtered_chats
+
+def reset_state():
+    st.session_state.chunks = []
+    st.session_state.delete_index = None
+    st.session_state.updated_rag = True
 
 def main():
     st.title("Hệ thống quản lý Chatbot")
@@ -68,9 +81,7 @@ def main():
         chat_history = load_chat_history()
         
         if chat_history:
-            st.session_state.chunks = []
-            st.session_state.delete_index = None
-            st.session_state.updated_rag = False
+            reset_state()
             student_list = ["Lựa chon mã sinh viên"] + sorted(list(chat_history.keys()))
             selected_student = st.selectbox("Mã sinh viên", options=student_list)
             
@@ -107,17 +118,6 @@ def main():
         st.header("Cập nhật kiến thức cho Chatbot")
 
         uploaded_file = st.file_uploader("Tải lên tệp", type=['txt', 'pdf', 'html', 'docx'])
-
-        # Initialize chunks list in session state
-        if "chunks" not in st.session_state:
-            st.session_state.chunks = []
-        
-        # Initialize delete state
-        if "delete_index" not in st.session_state:
-            st.session_state.delete_index = None
-
-        if "updated_rag" not in st.session_state:
-            st.session_state.updated_rag = False
 
         if uploaded_file:            
             try:
@@ -188,13 +188,10 @@ def main():
                     # Save chunks
                     if st.button("Lưu"):
                         try:
-                            vector_store = FAISSDatabase(HFEmbedding(), faiss_dir)
+                            vector_store = FAISSDatabase(HFEmbedding(), FAISS_PATH)
                             db = vector_store.db_get()
                             vector_store.db_add(st.session_state.chunks)
-                            uploaded_file = None
-                            st.session_state.chunks = []
-                            st.session_state.delete_index = None
-                            st.session_state.updated_rag = True
+                            reset_state()
                             st.rerun()
                         except Exception as e:
                             st.error(f"Lỗi khi lưu tệp JSON: {str(e)}")

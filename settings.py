@@ -4,12 +4,11 @@ from langchain_core.output_parsers import JsonOutputParser
 import json
 
 from modules.function_calls import ToolCalling, function_tools
-from modules.configs import  CHATS_PATH, histories
+from modules.configs import  CHATS_PATH
 from modules.tools import converse, course_fix, course_cancel, search_schedule, search_exams
 from modals import HAUChat
-from utils import LLM_NAME
-
-main_llm = OllamaLLM(model=LLM_NAME)
+from utils import LLM_NAME, get_history
+from processing import histories, sub_model
 
 function_tools.append(converse)
 function_tools.append(course_fix)
@@ -32,7 +31,7 @@ main_prompt = ChatPromptTemplate.from_messages(
     [("system", main_system_prompt), ("user", "{input}")]
 )
 
-main_chain = main_prompt | main_llm | JsonOutputParser() | toolcall.chain
+main_chain = main_prompt | sub_model | JsonOutputParser() | toolcall.chain
 
 def get_response(user_id, data):
     # user_id = data['username']
@@ -42,11 +41,8 @@ def get_response(user_id, data):
     global histories
     # Load the chat history from the JSON file
     chats = HAUChat.from_json(chat_id=chat_id, json_path=f'{CHATS_PATH}/{user_id}.json')
-    histories.append(chats.messages)
-    # globals().update({"history" : chats.messages})
-    
-    # with open('history.json', 'w', encoding='utf-8') as file:
-    #     json.dump(history, file, indent=4, ensure_ascii=False)
+    histories.append(get_history(chats.messages))
+
     print(content)
 
     # Add the user's message to the chat history

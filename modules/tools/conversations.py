@@ -1,5 +1,5 @@
 from langchain_core.tools import tool
-from modules.configs import sub_chain, semanticRouter, rag, histories
+from processing import sub_chain, semanticRouter, rag, histories
 
 @tool
 def converse(query: str) -> str:
@@ -31,9 +31,7 @@ Hãy trả lời câu hỏi:
         context = f"""
 Đây là lịch sử cuộc trò chuyện:
 {history}
-sender User là tôi
-sender AIMAGE là bạn
-Hãy tổng hợp lại lịch sử và trả lời câu hỏi:
+Hãy nhớ nó và trả lời câu hỏi:
 {query}
 """
         return sub_chain.stream(context)

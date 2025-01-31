@@ -1,7 +1,8 @@
 from langchain_core.tools import tool
 
 from modals import LichThi
-from modules.configs import sub_chain, EXAMS_PATH
+from modules.configs import EXAMS_PATH
+from processing import sub_chain
 
 @tool
 def search_exams(msv: str, date_to_search: str):

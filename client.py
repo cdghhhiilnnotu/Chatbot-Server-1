@@ -1,6 +1,6 @@
 import requests
 
-url = "http://127.0.0.1:1237/response/20"
+url = "http://127.0.0.1:1237/response/2055010051"
 
 def test_with(query=""):
     with requests.post(
@@ -36,11 +36,11 @@ def test_with(query=""):
 queries = [
     "Chào bạn, tôi tên là Dương, tên bạn là gì?",
     "Tên tôi là gì?",
-    # "Học phần là gì?",
-    # "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
-    # "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
-    # "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
-    # "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
+    "Học phần là gì?",
+    "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
+    "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+    "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
+    "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
 ]
 
 # queries = [
