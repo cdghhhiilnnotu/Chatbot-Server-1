@@ -5,9 +5,9 @@ import numpy as np
 from typing import List
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from modules.configs import EMBEDDING_MODEL
 from modules.embeddings import BaseEmbedding
 
+from utils import EMBEDDING_MODEL
 
 class HFEmbedding(BaseEmbedding):
 

@@ -12,7 +12,6 @@ from modules.storings import BaseDatabase
 class FAISSDatabase(BaseDatabase):
 
     db_name = 'faiss/'
-    db_len = 0
 
     def __init__(self, embedding_model, db_path:str='faiss/'):
         super().__init__(embedding_model, db_path)
@@ -32,7 +31,6 @@ class FAISSDatabase(BaseDatabase):
         )
 
         index_to_docstore_id = {i: i for i in range(len(chunks))}
-        self.db_len = len(index_to_docstore_id)
 
         self.db = FAISS(
             embedding_function=self.embedding_model.core,
@@ -49,8 +47,11 @@ class FAISSDatabase(BaseDatabase):
         return self.db
         
     def db_add(self, docs):
-        ids = [self.db_len + i for i in range(len(docs))]
+        ids = [len(self.db.index_to_docstore_id) + i for i in range(len(docs))]
         self.db.add_documents(documents=docs, ids=ids)
+
+    def db_len(self):
+        return len(self.db.index_to_docstore_id)
 
 if __name__ == "__main__":
     from modules.embeddings import HFEmbedding

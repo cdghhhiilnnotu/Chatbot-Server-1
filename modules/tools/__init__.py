@@ -1,2 +1,4 @@
-from modules.tools.course import *
-from modules.tools.schedule import *
+from modules.tools.exams import *
+from modules.tools.schedules import *
+from modules.tools.conversations import *
+from modules.tools.courses import *

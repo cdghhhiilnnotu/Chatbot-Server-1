@@ -1,23 +1,31 @@
-from typing import Generator
-from starlette.responses import StreamingResponse, JSONResponse
-from fastapi import status, HTTPException, FastAPI
+from starlette.responses import StreamingResponse
+from fastapi import status, HTTPException, FastAPI, Body
 import uvicorn
-from settings import chat
-import time
+from settings import get_response
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
-# Now response the API
 app = FastAPI()
 
-@app.post("/response/")
-async def get_response(data: dict):
+@app.post("/response/{user_id}")
+async def response(user_id: str, data: dict = Body(...)):
+    """
+    Handle requests with an User ID in the URL and additional data in the body.
+    
+    Args:
+        user_id (str): The User ID passed in the URL.
+        data (dict): The additional data sent in the request body.
+    
+    Returns:
+        StreamingResponse: The response stream based on the processed input.
+    """
     try:
-        return StreamingResponse(chat(data), media_type="text/plain; charset=utf-8")
+        # Pass both the ID and the body data to your `get_response` function
+        return StreamingResponse(get_response(user_id, data), media_type="text/plain; charset=utf-8")
     except FileNotFoundError:
         raise HTTPException(detail="File not found.", status_code=status.HTTP_404_NOT_FOUND)
-
-@app.get("/test/")
-async def get_response(data: dict):
-    return {"Result":"Successfully"}
+    except Exception as e:
+        raise HTTPException(detail=str(e), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 if __name__ == "__main__":
-    uvicorn.run(app, host='127.0.0.1', port=1237)
+    uvicorn.run(app, host="127.0.0.1", port=1237)

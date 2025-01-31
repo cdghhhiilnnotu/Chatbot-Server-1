@@ -1,80 +1,72 @@
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import JsonOutputParser, JsonOutputToolsParser, SimpleJsonOutputParser
-from langchain_core.tools import tool
-from typing import Generator
+from langchain_core.output_parsers import JsonOutputParser
+import json
 
 from modules.function_calls import ToolCalling, function_tools
-from modules.routers import SemanticRouter, Route, specials, chitchats
-from modules.embeddings import HFEmbedding
-from modules.configs import LLM_NAME, save_json, load_json, update_chat_data
-from modules.rags import FAISSRag
-from modules.storings import FAISSDatabase
-from modules.tools import course_fix, course_cancel, search_schedule
+from modules.configs import  CHATS_PATH, histories
+from modules.tools import converse, course_fix, course_cancel, search_schedule, search_exams
+from modals import HAUChat
+from utils import LLM_NAME
 
-model = OllamaLLM(model=LLM_NAME)
-
-modelEmbeding = HFEmbedding()
-specialRoute = Route(name='specials', samples=specials)
-chitchatRoute = Route(name='chitchats', samples=chitchats)
-semanticRouter = SemanticRouter(modelEmbeding, routes=[specialRoute, chitchatRoute])
-
-vector_store = FAISSDatabase(modelEmbeding, './sources/database/faiss/v0')
-rag = FAISSRag(vector_store)
-history = []
-
-@tool
-def converse(query: str) -> str:
-    "Trả lời cuộc hội thoại theo ngôn ngữ tự nhiên"
-    print("converse")
-    guidedRoute = semanticRouter.guide(query)[1]
-    if guidedRoute == 'specials':
-        print("Guide to RAGs")
-        rag_context = rag.to_text(query)
-        context = f"""\nĐây là lịch sử cuộc trò chuyện:\n{history}\nVới các thông tin sau (nếu có):\n{rag_context}.\nHãy trả lời câu hỏi:\n{query}"""
-        # response = model.invoke(context)
-        return model.stream(context)
-    else:
-        print("Guide to LLMs")
-        context = f"""\nĐây là lịch sử cuộc trò chuyện:\n{history}.\nHãy trả lời câu hỏi:{query}"""
-        # response = model.invoke(query
-        return model.stream(context)
-    
+main_llm = OllamaLLM(model=LLM_NAME)
 
 function_tools.append(converse)
 function_tools.append(course_fix)
 function_tools.append(course_cancel)
 function_tools.append(search_schedule)
-
+function_tools.append(search_exams)
 toolcall = ToolCalling(function_tools)
 tool_render = toolcall.render()
 
-
-system_prompt = f"""
-Dựa vào câu hỏi đầu vào của người dùng, 
-trả về dưới dạng JSON với
-key 'name' là tên công cụ
-value 'arguments' là 1 dictionary các tham số đầu vào.
-Hãy sử dụng các công cụ sau đây:
+main_system_prompt = f"""
+Sử dụng các công cụ sau đây:
 {tool_render}
-Trả lời câu hỏi ngắn gọn nhất có thể. Nếu không thể trả lời được câu hỏi hãy nói rằng không biết.
-Hãy nhớ, bạn là trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội trong việc hỗ trợ trả lời các câu hỏi của sinh viên.
-Tên bạn là AIMAGE, hãy nhớ điều đó.
+Dựa vào câu hỏi của người dùng, hãy trả về dưới dạng JSON với
+- key 'name' là tên công cụ cần sử dụng
+- value 'arguments' là 1 dictionary các tham số đầu vào của công cụ đó.
+Hãy tận dụng các công cụ đó một cách hợp lý, nếu không hãy trả lời theo cách thông thường.
 """
 
-prompt = ChatPromptTemplate.from_messages(
-    [("system", system_prompt), ("user", "{input}")]
+main_prompt = ChatPromptTemplate.from_messages(
+    [("system", main_system_prompt), ("user", "{input}")]
 )
 
-chain = prompt | model | JsonOutputParser() | toolcall.chain
+main_chain = main_prompt | main_llm | JsonOutputParser() | toolcall.chain
 
-def chat(data):
-    update_chat_data("chats.json", data)
-    global history 
-    history = data['history']
-    # print(data)
-    for chunk in chain.invoke(data['query']):
-        yield str(chunk)
-    data['history'] = history
-    update_chat_data("chats.json", data)
+def get_response(user_id, data):
+    # user_id = data['username']
+    user_id = user_id
+    chat_id = data['chat_id']
+    content = data['query']
+    global histories
+    # Load the chat history from the JSON file
+    chats = HAUChat.from_json(chat_id=chat_id, json_path=f'{CHATS_PATH}/{user_id}.json')
+    histories.append(chats.messages)
+    # globals().update({"history" : chats.messages})
     
+    # with open('history.json', 'w', encoding='utf-8') as file:
+    #     json.dump(history, file, indent=4, ensure_ascii=False)
+    print(content)
+
+    # Add the user's message to the chat history
+    chats.add_message(sender="User", content=content)
+
+    try:
+        response = ""
+        # Process the query and collect the response from the chain
+        for chunk in main_chain.invoke(data['query']):
+            response += str(chunk)  # Accumulate the response chunks
+            yield str(chunk)  # Yield each chunk as it's generated
+
+    except Exception as e:
+        print(f"Error: {e}")
+        response = "Xảy ra lỗi khi đưa ra câu trả lời"
+        for chunk in response:
+            yield chunk  # Yield the error message
+
+    # Add the bot's response to the chat history
+    chats.add_message(sender="AIMAGE", content=response)
+
+    # Save the updated chat history to the JSON file
+    chats.to_json(f'{CHATS_PATH}/{user_id}.json')

@@ -1,0 +1,13 @@
+model:
+  llm_name: llama3.1
+  embedding_name: keepitreal/vietnamese-sbert
+
+database:
+  faiss: ./sources/database/faiss/v0
+  chats: ./sources/database/chats
+
+routes:
+  - rag:
+      name: specials
+  - normal:
+      name: chitchats

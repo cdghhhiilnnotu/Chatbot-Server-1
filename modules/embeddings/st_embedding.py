@@ -4,13 +4,13 @@ sys.path.append('../../../demo-5')
 from typing import List
 from sentence_transformers import SentenceTransformer
 
-from modules.configs import EMBEDDING_MODEL
 from modules.embeddings import BaseEmbedding
 
+from utils import EMBEDDING_MODEL
 
 class STEmbedding(BaseEmbedding):
 
-    def __init__(self, model_name: str =EMBEDDING_MODEL):
+    def __init__(self, model_name: str = EMBEDDING_MODEL):
         super().__init__('SentenceTransformer')
         self.core = SentenceTransformer(model_name)
 

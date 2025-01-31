@@ -7,7 +7,8 @@ import pytesseract
 from pdf2image import convert_from_path
 from langchain_core.documents import Document
 
-pytesseract.pytesseract.tesseract_cmd = os.getenv('TESSEREACT_EXE')
+# pytesseract.pytesseract.tesseract_cmd = os.getenv('TESSEREACT_EXE')
+pytesseract.pytesseract.tesseract_cmd = "C:/Users/DuongNT/AppData/Local/Programs/Tesseract-OCR/tesseract.exe"
 
 from modules.extractings import BaseExtractor
 
@@ -17,8 +18,7 @@ class PDFExtractor(BaseExtractor):
         super().__init__('PDFExtractor')
 
     def load(self, pdf_path):
-        pdf_path = os.path.abspath(pdf_path)
-        try:
+        # pdf_path = os.path.abspath(pdf_path)
             doc = fitz.open(pdf_path)
             pdf_text = ""
             hyperlinks = []
@@ -52,18 +52,18 @@ class PDFExtractor(BaseExtractor):
             )
             return document
 
-        except Exception as e:
-            error_message = str(e)
-            print(f"Error processing {pdf_path}: {error_message}")
-            return Document(
-                page_content="",
-                metadata={
-                    "source": pdf_path,
-                    "hyperlinks": [],
-                    "tables": [],
-                    "error": error_message
-                }
-            )
+        # except Exception as e:
+        #     error_message = str(e)
+        #     print(f"Error processing {pdf_path}: {error_message}")
+        #     return Document(
+        #         page_content="",
+        #         metadata={
+        #             "source": pdf_path,
+        #             "hyperlinks": [],
+        #             "tables": [],
+        #             "error": error_message
+        #         }
+        #     )
 
     def loads(self, pdfs_dir):
         documents = []
