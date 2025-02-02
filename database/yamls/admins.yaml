@@ -1,0 +1,27 @@
+cookie:
+  expiry_days: 30
+  key: ur{~3{O3K6
+  name: hau_chatbot
+  value: 505132
+credentials:
+  usernames:
+    admin1:
+      name: Quản trị viên 1
+      org_password: adminchatbot1
+      password: $2b$12$liw6jBYMoC25Slfv4nSFmurtAbSXrGnAHz10OpmBDZ6uhNW9vgtdS
+      role: Admin
+    admin2:
+      name: Quản trị viên 2
+      org_password: adminchatbot2
+      password: $2b$12$GoSwHON7Y/WPV40XqLrIOOVHa.cxelpMBYAv/I1cuvi55RNMpq20C
+      role: Admin
+    viewer1:
+      name: Người xem 1
+      org_password: chat1
+      password: $2b$12$eD3SFPH82ptafcR7jn1jUuZt80hvSvD1W5LsbMh7J56..5hGe4u/q
+      role: Viewer
+    viewer2:
+      name: Người xem 2
+      org_password: chatbot2
+      password: $2b$12$q5IXp.7WZ2fFdan2y0ilCOsIK1ZqQBi7rthY1fiTYysqDpURrQ.IG
+      role: Viewer

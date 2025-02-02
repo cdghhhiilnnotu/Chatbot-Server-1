@@ -41,6 +41,8 @@ def get_response(user_id, data):
     global histories
     # Load the chat history from the JSON file
     chats = HAUChat.from_json(chat_id=chat_id, json_path=f'{CHATS_PATH}/{user_id}.json')
+    # print(get_history(chats.messages))
+    # histories.append(chats.messages)
     histories.append(get_history(chats.messages))
 
     print(content)
