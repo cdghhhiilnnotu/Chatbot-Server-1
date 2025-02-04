@@ -1,0 +1,15 @@
+usernames:
+  '2055010051':
+    name: Nguyễn Thành Dương
+    password: duong1
+    others: 
+      tie: '20'
+      class: 20CN3
+      drl: '3.5'
+  '2055010153':
+    name: Dương Khánh Linh
+    password: linh1
+    others: 
+      tie: '20'
+      class: 20CN3
+      drl: '3.5'

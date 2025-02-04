@@ -7,7 +7,7 @@ def test_with(query=""):
         url,
         json={
             "query": query,
-            "chat_id": "123"
+            "chat_id": "anh"
         },
         stream=True
     ) as response:
@@ -33,21 +33,28 @@ def test_with(query=""):
                 print(line, end='')
 
 
-queries = [
-    "Chào bạn, tôi tên là Dương, tên bạn là gì?",
-    "Tên tôi là gì?",
-    "Học phần là gì?",
-    "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
-    "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
-    "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
-    "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
-]
-
 # queries = [
-#     "Tôi đã hỏi những câu hỏi gì"
+#     "Chào bạn, tôi tên là Dương, tên bạn là gì?",
+#     "Tên tôi là gì?",
+#     "Học phần là gì?",
+#     "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
+#     "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+#     "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
+#     "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
 # ]
+
+queries = [
+    "chào bạn"
+]
 
 for query in queries:
     print(query)
     test_with(query)
     print("\n")
+
+# print(requests.get('"http://127.0.0.1:1237/login/a"').json())
+
+# import requests
+
+# response = requests.get("http://127.0.0.1:1237/login/2055010051")
+# print(response.json())

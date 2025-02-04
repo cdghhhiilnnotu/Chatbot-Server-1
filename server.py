@@ -1,7 +1,8 @@
-from starlette.responses import StreamingResponse
+from starlette.responses import StreamingResponse, JSONResponse
 from fastapi import status, HTTPException, FastAPI, Body
 import uvicorn
 from settings import get_response
+from utils import load_account, load_chats
 
 app = FastAPI()
 
@@ -24,6 +25,18 @@ async def response(user_id: str, data: dict = Body(...)):
         raise HTTPException(detail="File not found.", status_code=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         raise HTTPException(detail=str(e), status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@app.get("/login/{user_id}")
+def verify(user_id: str):
+    data = load_account(user_id)
+    print(data)
+    if 'error' not in data:
+        chats = load_chats(user_id)
+        data['chats'] = chats
+    return JSONResponse(data)
+
+
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=1237)
