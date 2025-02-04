@@ -10,18 +10,22 @@ credentials:
       org_password: adminchatbot1
       password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
       role: Admin
+      others: none
     admin2:
       name: Quản trị viên 2
       org_password: adminchatbot2
       password: $2b$12$xtJnKY3oNALpviMCO7yxGOIlriQBuxtii3UgXSfOcq1kkpY4N/b1a
       role: Admin
+      others: none
     viewer1:
       name: Người xem 1
       org_password: chat1
       password: $2b$12$/XRLca4MkpTww4EaK7khmuChatEmudezSzVJjm6x.XzncwLuzztX6
       role: Viewer
+      others: none
     viewer2:
       name: Người xem 2
       org_password: chatbot2
       password: $2b$12$Jr9CzdocLfnLTKgH7d1f5OTrAGr9giijJbWqCWeZoCAO6afR7rqb.
       role: Viewer
+      others: none

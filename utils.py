@@ -50,6 +50,7 @@ def load_chats(username):
             json.dump(data, file, indent=4, ensure_ascii=False)
     return data
 
+
 if __name__ == "__main__":
     print(load_chats('2051010032'))
     print(load_chats('2055010051'))

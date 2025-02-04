@@ -10,7 +10,7 @@ import string
 from modules.configs import CHATS_PATH, CONFIG_ADMINS_PATH
 
 with open(CONFIG_ADMINS_PATH, "r", encoding="utf-8") as file:
-    accounts_data = yaml.safe_load(file)
+    admins_data = yaml.safe_load(file)
 
 def load_chat_history(folder_path=CHATS_PATH):
     try:
@@ -74,8 +74,8 @@ def add_account(username, name, role, org_password):
         "password": "",
     }
 
-    if username not in accounts_data["credentials"]["usernames"]:
-        accounts_data["credentials"]["usernames"][username] = new_user
+    if username not in admins_data["credentials"]["usernames"]:
+        admins_data["credentials"]["usernames"][username] = new_user
 
         update_yaml()
         return True
@@ -83,21 +83,21 @@ def add_account(username, name, role, org_password):
         return False
     
 def update_yaml():
-    credentials = accounts_data['credentials']['usernames']
+    credentials = admins_data['credentials']['usernames']
     usernames = list(credentials.keys())
     names = [info['name'] for info in credentials.values()]
     roles = [info['role'] for info in credentials.values()]
     org_passwords = [info['org_password'] for info in credentials.values()]
 
-    cookie = accounts_data['cookie']
-    accounts_data['cookie']['key'] = generate_random_string()
+    cookie = admins_data['cookie']
+    admins_data['cookie']['key'] = generate_random_string()
 
     passwords = stauth.Hasher(org_passwords).generate()
     for username, new_password in zip(usernames, passwords):
         credentials[username]['password'] = new_password
 
     with open(CONFIG_ADMINS_PATH, 'w', encoding='utf-8') as file:
-        yaml.dump(accounts_data, file, default_flow_style=False, allow_unicode=True)
+        yaml.dump(admins_data, file, default_flow_style=False, allow_unicode=True)
 
 def update_account(username, name, role, org_password):
     updated_user = {
@@ -107,8 +107,8 @@ def update_account(username, name, role, org_password):
         "password": "",
     }
 
-    if username in accounts_data["credentials"]["usernames"] or username.lower() == "none":
-        accounts_data["credentials"]["usernames"][username] = updated_user
+    if username in admins_data["credentials"]["usernames"] or username.lower() == "none":
+        admins_data["credentials"]["usernames"][username] = updated_user
 
         update_yaml()
         return True
@@ -116,7 +116,7 @@ def update_account(username, name, role, org_password):
         return False
 
 def load_account(username):
-    usernames = accounts_data['credentials']['usernames']
+    usernames = admins_data['credentials']['usernames']
     username_infor = usernames[username]
     name = username_infor['name']
     role = username_infor['role']
@@ -127,14 +127,14 @@ def load_account(username):
 
 def load_accounts():
     update_yaml()
-    credentials = accounts_data['credentials']['usernames']
+    credentials = admins_data['credentials']['usernames']
     usernames = list(credentials.keys())
     names = [info['name'] for info in credentials.values()]
     roles = [info['role'] for info in credentials.values()]
     org_passwords = [info['org_password'] for info in credentials.values()]
     passwords = [info['password'] for info in credentials.values()]
 
-    cookie = accounts_data['cookie']
+    cookie = admins_data['cookie']
     cookie_name = cookie['name']
     cookie_key = cookie['key']
     cookie_value = cookie['value']
