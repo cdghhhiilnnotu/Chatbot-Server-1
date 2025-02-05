@@ -7,10 +7,11 @@ import random
 import streamlit_authenticator as stauth
 import string
 
-from modules.configs import CHATS_PATH, CONFIG_ADMINS_PATH
+from modules.configs import CHATS_PATH, CONFIG_ADMINS_PATH, ACCOUNTS_PATH
+from modules.databases import HauAccDB
 
-with open(CONFIG_ADMINS_PATH, "r", encoding="utf-8") as file:
-    admins_data = yaml.safe_load(file)
+accounts_db = HauAccDB()
+accounts_db.load_json([ACCOUNTS_PATH])
 
 def load_chat_history(folder_path=CHATS_PATH):
     try:
@@ -66,79 +67,50 @@ def setup_state():
     if "updated_rag" not in st.session_state:
         st.session_state.updated_rag = False
 
-def add_account(username, name, role, org_password):
+def add_account(username, name, role, org_password, others = "none"):
     new_user = {
-        "name": name,
-        "role": role,
-        "org_password": org_password,
-        "password": "",
+        username : {
+            "name": name,
+            "role": role,
+            "password": org_password,
+            "others": others
+        }
     }
 
-    if username not in admins_data["credentials"]["usernames"]:
-        admins_data["credentials"]["usernames"][username] = new_user
-
-        update_yaml()
+    if accounts_db.insert_acc(new_user) == "":
         return True
     else:
         return False
-    
-def update_yaml():
-    credentials = admins_data['credentials']['usernames']
-    usernames = list(credentials.keys())
-    names = [info['name'] for info in credentials.values()]
-    roles = [info['role'] for info in credentials.values()]
-    org_passwords = [info['org_password'] for info in credentials.values()]
 
-    cookie = admins_data['cookie']
-    admins_data['cookie']['key'] = generate_random_string()
-
-    passwords = stauth.Hasher(org_passwords).generate()
-    for username, new_password in zip(usernames, passwords):
-        credentials[username]['password'] = new_password
-
-    with open(CONFIG_ADMINS_PATH, 'w', encoding='utf-8') as file:
-        yaml.dump(admins_data, file, default_flow_style=False, allow_unicode=True)
-
-def update_account(username, name, role, org_password):
+def update_account(username, name, role, org_password, others = "none"):
     updated_user = {
-        "name": name,
-        "role": role,
-        "org_password": org_password,
-        "password": "",
+        username : {
+            "name": name,
+            "role": role,
+            "password": org_password,
+            "others": others
+        }
     }
 
-    if username in admins_data["credentials"]["usernames"] or username.lower() == "none":
-        admins_data["credentials"]["usernames"][username] = updated_user
-
-        update_yaml()
+    if accounts_db.update_acc(updated_user) == "":
         return True
     else:
         return False
 
 def load_account(username):
-    usernames = admins_data['credentials']['usernames']
-    username_infor = usernames[username]
-    name = username_infor['name']
-    role = username_infor['role']
-    org_password = username_infor['org_password']
-    password = username_infor['password']
+    acc_infor = accounts_db.load_acc(username)
+    username, name, role, password, org_password = username, acc_infor['name'], acc_infor['role'], acc_infor['hash_password'], acc_infor['password']
 
     return username, name, role, password, org_password
 
-def load_accounts():
-    update_yaml()
-    credentials = admins_data['credentials']['usernames']
-    usernames = list(credentials.keys())
-    names = [info['name'] for info in credentials.values()]
-    roles = [info['role'] for info in credentials.values()]
-    org_passwords = [info['org_password'] for info in credentials.values()]
-    passwords = [info['password'] for info in credentials.values()]
+def delete_account(username):
+    if accounts_db.delete_acc(username):
+        return True
+    else:
+        return False
 
-    cookie = admins_data['cookie']
-    cookie_name = cookie['name']
-    cookie_key = cookie['key']
-    cookie_value = cookie['value']
-    cookie_expiry_days = cookie['expiry_days']
+def load_accounts():
+    usernames, names, roles, passwords, org_passwords, cookie_name, cookie_key, cookie_value, cookie_expiry_days = accounts_db.load_accs()
 
     return usernames, names, roles, passwords, org_passwords, cookie_name, cookie_key, cookie_value, cookie_expiry_days
 

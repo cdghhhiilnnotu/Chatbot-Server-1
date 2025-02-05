@@ -1,0 +1,57 @@
+{
+    "pnFiJb3YzU": {
+        "createdAt": "2025-02-05 00:31:49",
+        "messages": [
+            {
+                "type": "User",
+                "text": "chào bạn",
+                "chat_at": "2025-02-05 00:31:49"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào! Tôi là AIMAGE, trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội. Bạn có thể cho tôi biết cách tôi có thể hỗ trợ bạn?",
+                "chat_at": "2025-02-05 00:32:56"
+            },
+            {
+                "type": "User",
+                "text": "xin chao",
+                "chat_at": "2025-02-05 01:13:36"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào! Tôi là AIMAGE, trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội. Bạn có thể cho tôi biết cách tôi có thể hỗ trợ bạn?",
+                "chat_at": "2025-02-05 01:14:52"
+            }
+        ]
+    },
+    "xGsDQCof4c": {
+        "createdAt": "2025-02-05 00:35:44",
+        "messages": [
+            {
+                "type": "User",
+                "text": "chào bạn, tên tôi là Dương",
+                "chat_at": "2025-02-05 00:35:44"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 00:36:04"
+            }
+        ]
+    },
+    "wbIHphZcHR": {
+        "createdAt": "2025-02-05 00:41:49",
+        "messages": [
+            {
+                "type": "User",
+                "text": "chào bạn, tên bạn là gì?",
+                "chat_at": "2025-02-05 00:41:49"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào! Tôi là AIMAGE, trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội.",
+                "chat_at": "2025-02-05 00:42:18"
+            }
+        ]
+    }
+}

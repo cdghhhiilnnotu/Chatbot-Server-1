@@ -1,10 +1,14 @@
 import yaml
 import json
 
-from modules.configs import CHATS_PATH, CONFIG_USERS_PATH
+from modules.configs import CHATS_PATH, CONFIG_USERS_PATH, ACCOUNTS_PATH
 
-with open(CONFIG_USERS_PATH, "r", encoding="utf-8") as file:
-    accounts_data = yaml.safe_load(file)
+# with open(CONFIG_USERS_PATH, "r", encoding="utf-8") as file:
+#     accounts_data = yaml.safe_load(file)
+from modules.databases import HauAccDB
+
+accounts_db = HauAccDB()
+accounts_db.load_json([ACCOUNTS_PATH])
 
 LLM_NAME = 'llama3.2'
 EMBEDDING_MODEL = 'keepitreal/vietnamese-sbert'
@@ -19,19 +23,13 @@ def get_history(history_messages):
     return his
 
 def load_account(username):
-    users = accounts_data['usernames']
-
     try:
-        user_infor = users[username]
-        name = user_infor['name']
-        password = user_infor['password']
-        others = user_infor['others']
-
+        acc_infor = accounts_db.load_acc(username)
         data = {
-            'username': username,
-            'name': name,
-            'password': password,
-            'others': others,
+            'username' : username,
+            'name' : acc_infor['name'],
+            'password' : acc_infor['password'],
+            'others' : acc_infor['others']
         }
     except Exception as e:
         data = {

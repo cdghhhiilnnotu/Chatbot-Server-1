@@ -7,8 +7,8 @@ credentials:
   usernames:
     '2055010051':
       name: Nguyễn Thành Dương
-      org_password: duong1
-      password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
+      password: duong1
+      hash_password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
       role: Viewer
       others: 
         tie: '20'
@@ -16,8 +16,8 @@ credentials:
         drl: '3.5'
     '2055010153':
       name: Dương Khánh Linh
-      org_password: linh1
-      password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
+      password: linh1
+      hash_password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
       role: Viewer
       others: 
         tie: '20'

@@ -31,8 +31,14 @@ class HauAccDB(BaseDB):
         self.update_db()
         
     def delete_acc(self, username: str):
-        self.data['credentials']['usernames'].pop(username, None)
-        self.update_db()
+        try:
+            self.data['credentials']['usernames'].pop(username, None)
+            self.update_db()
+            return True
+        except Exception as e:
+            print(e)
+            return False
+    
 
     def load_acc(self, username: str):
         if username not in self.data['credentials']['usernames'].keys():
@@ -52,13 +58,15 @@ class HauAccDB(BaseDB):
             }
         }
         """
+        status_str = ""
         for acc in accs:
             if acc not in self.data['credentials']['usernames'].keys():
                 self.data['credentials']['usernames'][acc] = accs[acc]
             else:
-                print(f"Key {acc} ALREADY exists.")
+                status_str += f"Key {acc} ALREADY exists." + "\n"
                 continue
         self.update_db()
+        return status_str
 
     def update_acc(self, accs: Dict[str, Dict]):
         """
@@ -71,11 +79,12 @@ class HauAccDB(BaseDB):
             }
         }
         """
+        status_str = ""
         for acc in accs:
             if acc in self.data['credentials']['usernames'].keys():
                 self.data['credentials']['usernames'][acc] = accs[acc]
             else:
-                print(f"Key {acc} does NOT exist.")
+                status_str += f"Key {acc} does NOT exist." + "\n"
                 continue
         self.update_db()
 

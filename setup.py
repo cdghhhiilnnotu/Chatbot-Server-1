@@ -2,6 +2,7 @@ from modules.chunkings import SemanticChunk
 from modules.embeddings import HFEmbedding
 from modules.storings import FAISSDatabase
 from modules.extractings import DOCXExtractor, HTMLExtractor, PDFExtractor, TXTExtractor
+from modules.configs import CONFIG_ADMINS_PATH, CONFIG_USERS_PATH
 import pickle
 from modules.configs import FAISS_PATH
 import os
@@ -36,8 +37,7 @@ def get_chunk_from_dir(dir_name, sub_dirs):
                 docs.append(doc)
         else:
             continue
-        # for file in os.listdir(sub_dir):
-        #     file_path = os.path.join(sub_dir, file)
+
     print(len(docs))
     embedding = HFEmbedding()    
     chunker = SemanticChunk(embedding_model=embedding)
@@ -50,12 +50,13 @@ def get_chunk_from_dir(dir_name, sub_dirs):
     vdb = FAISSDatabase(embedding, './database/faiss/v2')
 
     db = vdb.db_create(chunks=chunks)
-    # extractor = PDFExtractor()
-    # doc = extractor.load("D:/Works/DATN/Dataset/pdfs/Hướng dẫn thực hiện quy chế công tác sinh viên trong đào tạo đại học hệ chính quy theo hệ thống tín chỉ.pdf")
-    # print(doc)
-            
+
+from modules.databases import HauAccDB
+
 
 if __name__ == "__main__":
-    get_chunk_from_dir('D:/Works/DATN/Dataset', ['docxs', 'htmls', 'pdfs'])
+    haudb = HauAccDB()
+    haudb.load_yamls([CONFIG_ADMINS_PATH, CONFIG_USERS_PATH])
+    # get_chunk_from_dir('D:/Works/DATN/Dataset', ['docxs', 'htmls', 'pdfs'])
     
 

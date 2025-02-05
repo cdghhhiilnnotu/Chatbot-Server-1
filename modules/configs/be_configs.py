@@ -11,3 +11,5 @@ CONFIG_ADMINS_PATH = "./database/yamls/admins.yaml"
 CONFIG_USERS_PATH = "./database/yamls/users.yaml"
 
 SIDEBAR_IMG_PATH = "./assets/images/sidebar_logo.png"
+
+ACCOUNTS_PATH = "./database/jsons/accounts.json"

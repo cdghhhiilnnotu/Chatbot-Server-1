@@ -14,7 +14,7 @@ from modules.configs import SIDEBAR_IMG_PATH
 from modules.extractings import PDFExtractor, HTMLExtractor, DOCXExtractor, TXTExtractor
 from modules.admins import load_chat_history, filter_chats_by_date, reset_state, \
                         display_chat_messages, setup_state, add_account, \
-                        load_accounts, update_account, load_account
+                        load_accounts, update_account, load_account, delete_account
 
 def page_chats():
     st.header("Tìm kiếm cuộc trò chuyện")
@@ -163,8 +163,8 @@ def page_access():
     st.markdown('<p style="font-size:30px; font-weight:bold;">Quyền truy cập</p>', unsafe_allow_html=True)
     selected = option_menu(
         menu_title=None,
-        options=['Thêm tài khoản', 'Chỉnh sửa'],
-        icons=['patch-plus-fill', 'diagram-2-fill'],
+        options=['Thêm tài khoản', 'Chỉnh sửa', 'Xóa'],
+        icons=['patch-plus-fill', 'diagram-2-fill', 'folder-minus'],
         styles={
             "nav-link": {"font-size": "18px", "font-family": "'Source Sans Pro', sans-serif", "font-weight": "400", "font-style": "normal"},
             "nav-link-selected": {"font-size": "18px", "font-family": "'Source Sans Pro', sans-serif", "font-weight": "700", "font-style": "bold"}
@@ -201,7 +201,27 @@ def page_access():
             
                 if modify_clicked:
                     if update_account(selected_username, name, role, password):
-                        st.success("Thay đổi thành công")
+                        st.success("Thay đổi thành công!")
+                    else:
+                        st.error("Đã xảy ra lỗi")
+    if selected == "Xóa":
+        list_username, list_names, list_roles, _, list_password, _, _, _, _ = load_accounts()
+        list_username.append("none")
+        selected_username = st.selectbox("Quyền truy cập", list_username, index=len(list_username)-1)
+        if selected_username.lower() != "none":
+            index = list_username.index(selected_username)
+            roles = ["Admin", "Viewer"]
+            role_index = roles.index(list_roles[index])
+            with st.form("modify_form",clear_on_submit=True):
+                st.markdown(f'<p style="font-size:20px; font-weight:bold;">{selected_username}</p>', unsafe_allow_html=True)
+                name = st.text_input("Họ và tên", placeholder=f"{list_names[index]}")
+                password = st.text_input("Mật khẩu", type="password", placeholder=f"{list_password[index]}")
+                role = st.selectbox("Quyền truy cập",roles, index=role_index)
+                modify_clicked = st.form_submit_button("Xóa")
+            
+                if modify_clicked:
+                    if delete_account(selected_username):
+                        st.success("Xóa thành công!")
                     else:
                         st.error("Đã xảy ra lỗi")
 
