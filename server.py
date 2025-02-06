@@ -17,23 +17,34 @@ async def response(user_id: str, data: dict = Body(...)):
     
 @app.get("/login/{user_id}")
 def login(user_id: str):
-    data = load_account(user_id)
-    print(data)
-    if 'error' not in data:
-        chats = load_chats(user_id)
-        data['chats'] = chats
-    return JSONResponse(data)
+    """Handles user login by user ID."""
+    user_data = load_account(user_id)
+    
+    if "error" not in user_data:
+        user_data["chats"] = load_chats(user_id)  # Attach chat history
+    
+    return JSONResponse(content=user_data, status_code=status.HTTP_200_OK)
 
 @app.post("/login")
 def login_p(data: dict = Body(...)):
-    user_data = load_account(data['username'])
-    if 'error' not in user_data:
-        if data['username'] == user_data['username'] and data['password'] == user_data['password']:
-            chats = load_chats(data['username'])
-            user_data['chats'] = chats
-        else:
-            return JSONResponse({'error': 'fail'})
-    return JSONResponse(user_data)
+    """Handles user login with username & password."""
+    username = data.get("username")
+    password = data.get("password")
+
+    if not username or not password:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Missing username or password.")
+
+    user_data = load_account(username)
+
+    if "error" in user_data:
+        return JSONResponse(content=user_data, status_code=status.HTTP_404_NOT_FOUND)
+
+    if username == user_data.get("username") and password == user_data.get("password"):
+        user_data["chats"] = load_chats(username)  # Attach chat history
+    else:
+        return JSONResponse(content={"error": "fail"}, status_code=status.HTTP_401_UNAUTHORIZED)
+
+    return JSONResponse(content=user_data, status_code=status.HTTP_200_OK)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=1237)
