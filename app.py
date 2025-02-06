@@ -20,15 +20,16 @@ def main():
     )
     name, authentication_status, username = authenticator.login("Đăng nhập", "main")
     try:
-        if authentication_status == False:
-            st.error("Username/Password is incorrect!")
-
-        if authentication_status:
-            user_index = usernames.index(username)
-            run_page(usernames[user_index], roles[user_index])
-            authenticator.logout("Đăng xuất", "sidebar")
+        user_index = usernames.index(username)
     except:
         pass
+
+    if authentication_status == False:
+        st.error("Username/Password is incorrect!")
+
+    if authentication_status:
+        run_page(usernames[user_index], roles[user_index])
+        authenticator.logout("Đăng xuất", "sidebar")
 
 
     

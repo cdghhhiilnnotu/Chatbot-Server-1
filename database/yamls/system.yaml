@@ -3,7 +3,7 @@ model:
   embedding_name: keepitreal/vietnamese-sbert
 
 database:
-  faiss: ./sources/database/faiss/v0
+  faiss: ./sources/database/faiss/v1
   chats: ./sources/database/chats
 
 routes:

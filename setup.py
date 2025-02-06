@@ -43,11 +43,11 @@ def get_chunk_from_dir(dir_name, sub_dirs):
     chunker = SemanticChunk(embedding_model=embedding)
     chunks = chunker.chunking(docs)
 
-    with open(f'./database/faiss/v1/documents.pkl', "wb") as file:
+    with open(f'{FAISS_PATH}/documents.pkl', "wb") as file:
         pickle.dump(chunks, file)
 
     embedding = HFEmbedding()
-    vdb = FAISSDatabase(embedding, './database/faiss/v2')
+    vdb = FAISSDatabase(embedding, f'{FAISS_PATH}')
 
     db = vdb.db_create(chunks=chunks)
 

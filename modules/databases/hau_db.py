@@ -87,6 +87,7 @@ class HauAccDB(BaseDB):
                 status_str += f"Key {acc} does NOT exist." + "\n"
                 continue
         self.update_db()
+        return status_str
 
     def load_json(self, jsons_list: List):
         for json_path in jsons_list:

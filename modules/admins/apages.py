@@ -17,12 +17,12 @@ from modules.admins import load_chat_history, filter_chats_by_date, reset_state,
                         load_accounts, update_account, load_account, delete_account
 
 def page_chats():
+    reset_state()
     st.header("Tìm kiếm cuộc trò chuyện")
     
     chat_history = load_chat_history()
     
     if chat_history:
-        reset_state()
         student_list = ["Lựa chon mã sinh viên"] + sorted(list(chat_history.keys()))
         selected_student = st.selectbox("Mã sinh viên", options=student_list)
         
@@ -61,6 +61,10 @@ def page_knowledge():
     uploaded_file = st.file_uploader("Tải lên tệp", type=['txt', 'pdf', 'html', 'docx'])
 
     if uploaded_file:            
+
+        # if st.session_state.updated_rag == False:
+        #     reset_state()
+
         try:
             if uploaded_file.name.endswith('.docx'):
                 with open("temp.docx", "wb") as f:
@@ -128,11 +132,13 @@ def page_knowledge():
                         db = vector_store.db_get()
                         vector_store.db_add(st.session_state.chunks)
                         reset_state()
+                        st.session_state.updated_rag = True
                         st.rerun()
                     except Exception as e:
                         st.error(f"Lỗi khi lưu tệp JSON: {str(e)}")
             
             if st.session_state.updated_rag:
+                print("hello")
                 st.success("Cập nhật kiến thức thành công!")
                 time.sleep(3)
                 st.session_state.updated_rag = False
@@ -160,6 +166,7 @@ def page_account(username):
                 st.error("Đã xảy ra lỗi")
 
 def page_access():
+    reset_state()
     st.markdown('<p style="font-size:30px; font-weight:bold;">Quyền truy cập</p>', unsafe_allow_html=True)
     selected = option_menu(
         menu_title=None,
@@ -209,14 +216,15 @@ def page_access():
         list_username.append("none")
         selected_username = st.selectbox("Quyền truy cập", list_username, index=len(list_username)-1)
         if selected_username.lower() != "none":
-            index = list_username.index(selected_username)
-            roles = ["Admin", "Viewer"]
-            role_index = roles.index(list_roles[index])
+            index_d = list_username.index(selected_username)
             with st.form("modify_form",clear_on_submit=True):
                 st.markdown(f'<p style="font-size:20px; font-weight:bold;">{selected_username}</p>', unsafe_allow_html=True)
-                name = st.text_input("Họ và tên", placeholder=f"{list_names[index]}")
-                password = st.text_input("Mật khẩu", type="password", placeholder=f"{list_password[index]}")
-                role = st.selectbox("Quyền truy cập",roles, index=role_index)
+                st.text("Họ và tên")
+                st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_names[index_d]}</p>', unsafe_allow_html=True)
+                st.text("Mật khẩu")
+                st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_password[index_d]}</p>', unsafe_allow_html=True)
+                st.text("Quyền truy cập")
+                st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_roles[index_d]}</p>', unsafe_allow_html=True)
                 modify_clicked = st.form_submit_button("Xóa")
             
                 if modify_clicked:
@@ -271,6 +279,6 @@ def run_page(username, role):
         st.title("Hệ thống quản lý Chatbot")
         page_admin()
     elif role.lower() == "viewer": 
-        setup_state()
+        # setup_state()
         st.title("Hệ thống quản lý Chatbot")
         page_viewer(username)

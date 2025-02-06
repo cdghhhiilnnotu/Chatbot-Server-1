@@ -53,5 +53,220 @@
                 "chat_at": "2025-02-05 00:42:18"
             }
         ]
+    },
+    "anh": {
+        "createdAt": "2025-02-05 19:45:18",
+        "messages": [
+            {
+                "type": "User",
+                "text": "Chào bạn, tôi tên là Dương, tên bạn là gì?",
+                "chat_at": "2025-02-05 19:45:18"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:18"
+            },
+            {
+                "type": "User",
+                "text": "Tên tôi là gì?",
+                "chat_at": "2025-02-05 19:45:19"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:19"
+            },
+            {
+                "type": "User",
+                "text": "Học phần là gì?",
+                "chat_at": "2025-02-05 19:45:20"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:20"
+            },
+            {
+                "type": "User",
+                "text": "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
+                "chat_at": "2025-02-05 19:45:21"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:21"
+            },
+            {
+                "type": "User",
+                "text": "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+                "chat_at": "2025-02-05 19:45:22"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:22"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
+                "chat_at": "2025-02-05 19:45:23"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:23"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
+                "chat_at": "2025-02-05 19:45:24"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:45:24"
+            },
+            {
+                "type": "User",
+                "text": "Chào bạn, tôi tên là Dương, tên bạn là gì?",
+                "chat_at": "2025-02-05 19:47:31"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Tôi tên là AIMAGE, trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội.",
+                "chat_at": "2025-02-05 19:47:57"
+            },
+            {
+                "type": "User",
+                "text": "Tên tôi là gì?",
+                "chat_at": "2025-02-05 19:47:58"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Tôi là Dương.",
+                "chat_at": "2025-02-05 19:48:01"
+            },
+            {
+                "type": "User",
+                "text": "Học phần là gì?",
+                "chat_at": "2025-02-05 19:48:02"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:48:04"
+            },
+            {
+                "type": "User",
+                "text": "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
+                "chat_at": "2025-02-05 19:48:05"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Cập nhật lịch học thành công!",
+                "chat_at": "2025-02-05 19:48:08"
+            },
+            {
+                "type": "User",
+                "text": "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+                "chat_at": "2025-02-05 19:48:09"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-05 19:48:17"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
+                "chat_at": "2025-02-05 19:48:18"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Tôi không có thông tin về lịch thi cụ thể ngày 03/02/2023. Tuy nhiên, dựa trên thông tin bạn cung cấp, tôi thấy có một kỳ thi với mã khóa học là TH5209, tên khóa học là \"Xử lý ảnh\" và sẽ diễn ra vào ngày 03/02/2023.\n\nĐể biết thêm thông tin chi tiết về lịch thi, tôi đề nghị bạn liên hệ trực tiếp với Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội hoặc truy cập trang web của trường để kiểm tra thông tin chính thức.",
+                "chat_at": "2025-02-05 19:48:25"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
+                "chat_at": "2025-02-05 19:48:26"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Tôi không có thông tin về lịch học ngày 04/09/2023 cho sinh viên. Tuy nhiên, tôi có thể xác nhận rằng lớp học 'Công nghệ Web' (TH4309_20CN1) sẽ được giảng dạy bởi giáo viên Nguyễn Quốc Huy vào các tiết 8, 9, 10, 11 và 12 ở phòng I7.703 với số tín chỉ là 3.0.",
+                "chat_at": "2025-02-05 19:48:35"
+            },
+            {
+                "type": "User",
+                "text": "Chào bạn, tôi tên là Dương, tên bạn là gì?",
+                "chat_at": "2025-02-06 09:13:29"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào Dương! Tên của tôi là AIMAGE, trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội.",
+                "chat_at": "2025-02-06 09:14:59"
+            },
+            {
+                "type": "User",
+                "text": "Tên tôi là gì?",
+                "chat_at": "2025-02-06 09:15:00"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào! Ten của con em la AIMAGE, truoi ly dac luat cua Phong Dao cao tao Truong Dai hoc Ke nuc Ha Noi.",
+                "chat_at": "2025-02-06 09:17:00"
+            },
+            {
+                "type": "User",
+                "text": "Học phần là gì?",
+                "chat_at": "2025-02-06 09:17:00"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Học phần là khối lượng kiến thức tương đối trọn vẹn, thuận tiện cho sinh viên tích lũy trong quá trình học tập.",
+                "chat_at": "2025-02-06 09:20:05"
+            },
+            {
+                "type": "User",
+                "text": "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
+                "chat_at": "2025-02-06 09:20:05"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Cập nhật lịch học thành công!",
+                "chat_at": "2025-02-06 09:20:37"
+            },
+            {
+                "type": "User",
+                "text": "Đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+                "chat_at": "2025-02-06 09:20:37"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Cập nhật lịch học thành công!",
+                "chat_at": "2025-02-06 09:20:44"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
+                "chat_at": "2025-02-06 09:20:44"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-06 09:20:58"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch học của sinh viên có mã 2055010051 ngày 04/09/2023.",
+                "chat_at": "2025-02-06 09:20:58"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào!\n\nLịch học ngày 04/09/2023 của bạn là:\n\n* Số tín chỉ: TH4309_20CN1\n* Tên học phần: Công nghệ Web\n* Giáo viên: Nguyễn Quốc Huy\n* Phòng: I7. 703\n* Tiết: Thứ 2, Thứ 4, Thứ 6, Thứ 7, Thứ 8\n\nHy vọng thông tin này hữu ích cho bạn!",
+                "chat_at": "2025-02-06 09:21:26"
+            }
+        ]
     }
 }

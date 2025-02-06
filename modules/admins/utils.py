@@ -55,7 +55,7 @@ def filter_chats_by_date(chat_data, start_date, end_date):
 def reset_state():
     st.session_state.chunks = []
     st.session_state.delete_index = None
-    st.session_state.updated_rag = True
+    # st.session_state.updated_rag = False
 
 def setup_state():
     if "chunks" not in st.session_state:

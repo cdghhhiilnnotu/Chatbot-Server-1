@@ -49,6 +49,8 @@ specials = [
     "Tôi cần làm gì nếu muốn học ở nước ngoài qua chương trình trao đổi?",
     "Trường có chương trình học bổng cho sinh viên quốc tế không?",
     "Có các câu lạc bộ học thuật nào trong trường không?",
+    "Ai thích ai?",
+    "Dương thích ai?"
     # "Điểm trung bình tích lũy (GPA) được tính như thế nào?",
     # "Làm thế nào để kiểm tra điểm của mình?",
     # "Điểm F có ảnh hưởng đến GPA không?",

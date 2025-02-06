@@ -4,7 +4,7 @@ ACTIVE_COURSES_PATH = "./database/active_courses"
 CHATS_PATH = "./database/chats"
 EXAMS_PATH = "./database/exams"
 SCHEDULES_PATH = "./database/schedules"
-FAISS_PATH = "./database/faiss/v1"
+FAISS_PATH = "./database/faiss/v0"
 
 CONFIG_SYSTEM_PATH = "./database/yamls/system.yaml"
 CONFIG_ADMINS_PATH = "./database/yamls/admins.yaml"
