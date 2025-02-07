@@ -32,7 +32,6 @@ def main():
         authenticator.logout("Đăng xuất", "sidebar")
 
 
-    
 
 if __name__ == "__main__":
     main()
