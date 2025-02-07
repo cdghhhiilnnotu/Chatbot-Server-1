@@ -68,5 +68,35 @@
                 "chat_at": "2025-02-05 19:45:18"
             }
         ]
+    },
+    "ad4kwHKngf": {
+        "createdAt": "2025-02-07 12:33:04",
+        "messages": [
+            {
+                "type": "User",
+                "text": "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010153.",
+                "chat_at": "2025-02-07 12:33:04"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Cập nhật lịch học thành công!",
+                "chat_at": "2025-02-07 12:33:36"
+            }
+        ]
+    },
+    "KsU04yFz9J": {
+        "createdAt": "2025-02-07 12:36:12",
+        "messages": [
+            {
+                "type": "User",
+                "text": "Hủy đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+                "chat_at": "2025-02-07 12:36:12"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Cập nhật lịch học thành công!",
+                "chat_at": "2025-02-07 12:36:31"
+            }
+        ]
     }
 }
