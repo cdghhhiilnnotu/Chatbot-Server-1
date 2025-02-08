@@ -14,7 +14,7 @@ from modules.configs import SIDEBAR_IMG_PATH
 from modules.extractings import PDFExtractor, HTMLExtractor, DOCXExtractor, TXTExtractor
 from modules.admins import load_chat_history, filter_chats_by_date, reset_state, \
                         display_chat_messages, setup_state, add_account, \
-                        load_accounts, update_account, load_account, delete_account
+                        load_accounts, update_account, load_account, delete_account, import_users
 
 def page_chats():
     reset_state()
@@ -61,10 +61,6 @@ def page_knowledge():
     uploaded_file = st.file_uploader("Tải lên tệp", type=['txt', 'pdf', 'html', 'docx'])
 
     if uploaded_file:            
-
-        # if st.session_state.updated_rag == False:
-        #     reset_state()
-
         try:
             if uploaded_file.name.endswith('.docx'):
                 with open("temp.docx", "wb") as f:
@@ -184,54 +180,129 @@ def page_access():
             username = st.text_input("Tên đăng nhập")
             password = st.text_input("Mật khẩu", type="password")
             role = st.selectbox("Quyền truy cập",("Admin", "Viewer"))
-            signup_clicked = st.form_submit_button("Thêm")
+            add_file = st.file_uploader("Thêm theo file", type=['csv'])
+            add_clicked = st.form_submit_button("Thêm")
         
-            if signup_clicked:
-                if add_account(username, name, role, password):
-                    st.success("Thêm thành công")
+            if add_clicked:
+                if add_file:
+                    with open("temp.csv", "wb") as f:
+                        f.write(add_file.getbuffer())
+                    new_users = import_users("temp.csv")
+                    os.remove("temp.csv")
+                    status_add = add_account(new_users)
+                    if len(status_add) == 0:
+                        st.success("Thêm thành công")
+                    else:
+                        for add_e in status_add:
+                            st.error(add_e)
                 else:
-                    st.error("Đã xảy ra lỗi")
+                    if name != "" and password != "":
+                        new_user = {
+                            username : {
+                                "name": name,
+                                "role": role,
+                                "password": password,
+                                "others": "none"
+                            }
+                        }
+                        status_add = add_account(new_user)
+                        if len(status_add) == 0:
+                            st.success("Thêm thành công")
+                        else:
+                            for add_e in status_add:
+                                st.error(add_e)
+                    else:
+                        st.error("Vui lòng nhập đầy đủ thông tin!")
+        
     if selected == "Chỉnh sửa":
         list_username, list_names, list_roles, _, list_password, _, _, _, _ = load_accounts()
         list_username.append("none")
         selected_username = st.selectbox("Quyền truy cập", list_username, index=len(list_username)-1)
-        if selected_username.lower() != "none":
-            index = list_username.index(selected_username)
-            roles = ["Admin", "Viewer"]
-            role_index = roles.index(list_roles[index])
-            with st.form("modify_form",clear_on_submit=True):
-                st.markdown(f'<p style="font-size:20px; font-weight:bold;">{selected_username}</p>', unsafe_allow_html=True)
-                name = st.text_input("Họ và tên", placeholder=f"{list_names[index]}")
-                password = st.text_input("Mật khẩu", type="password", placeholder=f"{list_password[index]}")
-                role = st.selectbox("Quyền truy cập",roles, index=role_index)
-                modify_clicked = st.form_submit_button("Hoàn tất")
-            
-                if modify_clicked:
-                    if update_account(selected_username, name, role, password):
-                        st.success("Thay đổi thành công!")
-                    else:
-                        st.error("Đã xảy ra lỗi")
+        modify_file = st.file_uploader("Chỉnh sửa theo file", type=['csv'])
+
+        if modify_file:
+            with open("temp.csv", "wb") as f:
+                f.write(modify_file.getbuffer())
+            updated_users = import_users("temp.csv")
+            os.remove("temp.csv")
+            if st.button("Chỉnh sửa", key="edit_files"):
+                status_modify = update_account(updated_users)
+                if len(status_modify) == 0:
+                    st.success("Thay đổi thành công")
+                else:
+                    for modify_e in status_modify:
+                        st.error(modify_e)
+        else:
+            if selected_username.lower() != "none":
+                index = list_username.index(selected_username)
+                roles = ["Admin", "Viewer"]
+                role_index = roles.index(list_roles[index])
+                with st.form("modify_form",clear_on_submit=True):
+                    st.markdown(f'<p style="font-size:20px; font-weight:bold;">{selected_username}</p>', unsafe_allow_html=True)
+                    name = st.text_input("Họ và tên", placeholder=f"{list_names[index]}")
+                    password = st.text_input("Mật khẩu", type="password", placeholder=f"{list_password[index]}")
+                    role = st.selectbox("Quyền truy cập",roles, index=role_index)
+                    modify_clicked = st.form_submit_button("Hoàn tất")
+                
+                    if modify_clicked:
+                        if name == "":
+                            name = list_names[index]
+                        if password == "":
+                            password = list_password[index]
+                        updated_user = {
+                            selected_username : {
+                                "name": name,
+                                "role": role,
+                                "password": password,
+                                "others": "none"
+                            }
+                        }
+                        status_add = update_account(updated_user)
+                        if len(status_add) == 0:
+                            st.success("Thay đổi thành công")
+                        else:
+                            for add_e in status_add:
+                                st.error(add_e)
+
+
     if selected == "Xóa":
         list_username, list_names, list_roles, _, list_password, _, _, _, _ = load_accounts()
         list_username.append("none")
         selected_username = st.selectbox("Quyền truy cập", list_username, index=len(list_username)-1)
-        if selected_username.lower() != "none":
-            index_d = list_username.index(selected_username)
-            with st.form("modify_form",clear_on_submit=True):
-                st.markdown(f'<p style="font-size:20px; font-weight:bold;">{selected_username}</p>', unsafe_allow_html=True)
-                st.text("Họ và tên")
-                st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_names[index_d]}</p>', unsafe_allow_html=True)
-                st.text("Mật khẩu")
-                st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_password[index_d]}</p>', unsafe_allow_html=True)
-                st.text("Quyền truy cập")
-                st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_roles[index_d]}</p>', unsafe_allow_html=True)
-                modify_clicked = st.form_submit_button("Xóa")
-            
-                if modify_clicked:
-                    if delete_account(selected_username):
-                        st.success("Xóa thành công!")
-                    else:
-                        st.error("Đã xảy ra lỗi")
+        delete_file = st.file_uploader("Xóa theo file", type=['csv'])
+
+        if delete_file:
+            with open("temp.csv", "wb") as f:
+                f.write(delete_file.getbuffer())
+            del_users = import_users("temp.csv")
+            os.remove("temp.csv")
+            if st.button("Xóa", key="delete_files"):
+                status_delete = delete_account(del_users)
+                if len(status_delete) == 0:
+                    st.success("Xóa thành công")
+                else:
+                    for delete_e in status_delete:
+                        st.error(delete_e)
+        else:
+            if selected_username.lower() != "none":
+                index_d = list_username.index(selected_username)
+                with st.form("modify_form",clear_on_submit=True):
+                    st.markdown(f'<p style="font-size:20px; font-weight:bold;">{selected_username}</p>', unsafe_allow_html=True)
+                    st.text("Họ và tên")
+                    st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_names[index_d]}</p>', unsafe_allow_html=True)
+                    st.text("Mật khẩu")
+                    st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_password[index_d]}</p>', unsafe_allow_html=True)
+                    st.text("Quyền truy cập")
+                    st.markdown(f'<p style="background-color: rgb(240,242,246); algin-content: center; padding: 5px 10px; border-radius: 10px">{list_roles[index_d]}</p>', unsafe_allow_html=True)
+                    modify_clicked = st.form_submit_button("Xóa")
+                
+                    if modify_clicked:
+                        status_delete = delete_account([selected_username])
+                        if len(status_delete) == 0:
+                            st.success("Xóa thành công")
+                        else:
+                            for delete_e in status_delete:
+                                st.error(delete_e)
 
 def page_admin():
     with st.sidebar:

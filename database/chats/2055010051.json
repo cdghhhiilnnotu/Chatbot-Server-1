@@ -96,6 +96,231 @@
                 "type": "AIMAGE",
                 "text": "Cập nhật lịch học thành công!",
                 "chat_at": "2025-02-07 12:36:31"
+            },
+            {
+                "type": "User",
+                "text": "chào bạn",
+                "chat_at": "2025-02-07 15:35:49"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 15:36:21"
+            },
+            {
+                "type": "User",
+                "text": "Tra cứu lịch thi của sinh viên có mã 2055010051 của ngày 03/02/2023.",
+                "chat_at": "2025-02-07 15:37:38"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Lịch thi ngày 03/02/2023 là:\n\n- Thời gian: 15H00 - 17H00\n- Địa điểm: ĐHKT H-H 8. 02 (P02)\n- Môn học: Xử lý ảnh (TH5209)",
+                "chat_at": "2025-02-07 15:38:01"
+            },
+            {
+                "type": "User",
+                "text": "chào bạn",
+                "chat_at": "2025-02-07 15:38:25"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 15:38:48"
+            },
+            {
+                "type": "User",
+                "text": "học phần là gì?",
+                "chat_at": "2025-02-07 15:39:32"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Học phần là khối lượng kiến thức tương đối trọn vẹn, thuận tiện cho sinh viên tích lũy trong quá trình học tập. Mỗi học phần được ký hiệu bằng một mã riêng do Nhà trường qui định và bao gồm nội dung kiến thức chính yếu của mỗi chương trình.",
+                "chat_at": "2025-02-07 15:41:36"
+            },
+            {
+                "type": "User",
+                "text": "cơ chế 1 cửa là gì?",
+                "chat_at": "2025-02-07 15:43:50"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xin chào! Tôi là AIMAGE, trợ lý đắc lực của Phòng Đào tạo Trường Đại học Kiến Trúc Hà Nội.\n\nCơ chế 1 cửa (One-stop-shop) là một phương thức tổ chức công tác, nhằm cung cấp các dịch vụ liên quan đến đăng ký, quản lý và theo dõi học tập của sinh viên một cách đơn giản, nhanh chóng và hiệu quả.",
+                "chat_at": "2025-02-07 15:45:13"
+            }
+        ]
+    },
+    "DeN0hLhBH6": {
+        "createdAt": "2025-02-07 16:31:50",
+        "messages": [
+            {
+                "type": "User",
+                "text": "chào bạn",
+                "chat_at": "2025-02-07 16:31:50"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 16:32:17"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2055010051.",
+                "chat_at": "2025-02-07 17:06:55"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Thay đổi lịch học sẽ ảnh hưởng trực tiếp đến thời khóa biểu của bạn, hãy xác nhận rằng bạn muốn thực hiện nó",
+                "chat_at": "2025-02-07 17:07:35"
+            },
+            {
+                "type": "User",
+                "text": "tôi muốn thực hiện nó",
+                "chat_at": "2025-02-07 17:08:01"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Cập nhật lịch học thành công!",
+                "chat_at": "2025-02-07 17:08:15"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 20550100153.",
+                "chat_at": "2025-02-07 17:16:12"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 17:17:00"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2051010032.",
+                "chat_at": "2025-02-07 17:20:52"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 17:21:41"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2051010032.",
+                "chat_at": "2025-02-07 17:25:25"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 17:26:15"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2051010032.",
+                "chat_at": "2025-02-07 17:36:37"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 17:37:26"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2051010032.",
+                "chat_at": "2025-02-07 17:42:29"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 17:43:27"
+            },
+            {
+                "type": "User",
+                "text": "đăng kí lớp học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên là 2051010032.",
+                "chat_at": "2025-02-07 17:45:01"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 17:45:43"
+            },
+            {
+                "type": "User",
+                "text": "Người dùng 2055010051 thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2051010032",
+                "chat_at": "2025-02-07 23:36:34"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Xảy ra lỗi khi đưa ra câu trả lời",
+                "chat_at": "2025-02-07 23:37:39"
+            },
+            {
+                "type": "User",
+                "text": "Người dùng 2055010051 thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2051010032",
+                "chat_at": "2025-02-07 23:39:16"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Bạn không có quyền.",
+                "chat_at": "2025-02-07 23:40:06"
+            },
+            {
+                "type": "User",
+                "text": "thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2051010032",
+                "chat_at": "2025-02-07 23:43:21"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Bạn không có quyền.",
+                "chat_at": "2025-02-07 23:44:11"
+            },
+            {
+                "type": "User",
+                "text": "Người dùng 2055010032 thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2051010032",
+                "chat_at": "2025-02-08 00:15:15"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Bạn không có quyền.",
+                "chat_at": "2025-02-08 00:16:36"
+            },
+            {
+                "type": "User",
+                "text": "Người dùng 2051010032 thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2051010032",
+                "chat_at": "2025-02-08 00:28:45"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Bạn không có quyền.",
+                "chat_at": "2025-02-08 00:29:53"
+            },
+            {
+                "type": "User",
+                "text": "Người dùng 2051010032 thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2055010051",
+                "chat_at": "2025-02-08 00:30:30"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Bạn không có quyền.",
+                "chat_at": "2025-02-08 00:30:48"
+            },
+            {
+                "type": "User",
+                "text": "thay đổi học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2055010051",
+                "chat_at": "2025-02-08 00:31:25"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "Bạn không có quyền.",
+                "chat_at": "2025-02-08 00:31:52"
+            },
+            {
+                "type": "User",
+                "text": "Hủy học phần có mã tín chỉ TH4309 của sinh viên có mã sinh viên 2055010051",
+                "chat_at": "2025-02-08 15:45:49"
+            },
+            {
+                "type": "AIMAGE",
+                "text": "",
+                "chat_at": "2025-02-08 15:47:27"
             }
         ]
     }

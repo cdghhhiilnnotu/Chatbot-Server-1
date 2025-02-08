@@ -30,14 +30,17 @@ class HauAccDB(BaseDB):
 
         self.update_db()
         
-    def delete_acc(self, username: str):
-        try:
-            self.data['credentials']['usernames'].pop(username, None)
-            self.update_db()
-            return True
-        except Exception as e:
-            print(e)
-            return False
+    def delete_acc(self, accs: Dict[str, Dict]):
+        status_str = []
+        for acc in accs:
+            if acc in self.data['credentials']['usernames'].keys():
+                self.data['credentials']['usernames'].pop(acc, None)
+            else:
+                status_str.append(f"Tên tài khoản {acc} không tồn tại." + "\n")
+                continue
+        self.update_db()
+
+        return status_str
     
 
     def load_acc(self, username: str):
@@ -58,14 +61,15 @@ class HauAccDB(BaseDB):
             }
         }
         """
-        status_str = ""
+        status_str = []
         for acc in accs:
             if acc not in self.data['credentials']['usernames'].keys():
                 self.data['credentials']['usernames'][acc] = accs[acc]
             else:
-                status_str += f"Key {acc} ALREADY exists." + "\n"
+                status_str.append(f"Tên tài khoản {acc} đã tồn tại." + "\n")
                 continue
         self.update_db()
+
         return status_str
 
     def update_acc(self, accs: Dict[str, Dict]):
@@ -79,12 +83,12 @@ class HauAccDB(BaseDB):
             }
         }
         """
-        status_str = ""
+        status_str = []
         for acc in accs:
             if acc in self.data['credentials']['usernames'].keys():
                 self.data['credentials']['usernames'][acc] = accs[acc]
             else:
-                status_str += f"Key {acc} does NOT exist." + "\n"
+                status_str.append( f"Tên tài khoản {acc} không tồn tại." + "\n")
                 continue
         self.update_db()
         return status_str

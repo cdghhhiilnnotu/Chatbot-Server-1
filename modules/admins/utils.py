@@ -3,6 +3,7 @@ import json
 import streamlit as st
 from datetime import datetime
 import yaml
+import pandas as pd
 import random
 import streamlit_authenticator as stauth
 import string
@@ -57,6 +58,20 @@ def reset_state():
     st.session_state.delete_index = None
     # st.session_state.updated_rag = False
 
+def import_users(csv_file):
+    df = pd.read_csv(csv_file, encoding='utf-8')
+    data = df.to_json(orient="records", force_ascii=False)
+    data = json.loads(data)
+    users = {}
+    for item in data:
+        users[item[list(item.keys())[1]]] = {
+            "name": item[list(item.keys())[0]],
+            "password": item[list(item.keys())[2]],
+            "role": item[list(item.keys())[3]],
+            "others": "none"
+        }
+    return users
+
 def setup_state():
     if "chunks" not in st.session_state:
         st.session_state.chunks = []
@@ -67,35 +82,11 @@ def setup_state():
     if "updated_rag" not in st.session_state:
         st.session_state.updated_rag = False
 
-def add_account(username, name, role, org_password, others = "none"):
-    new_user = {
-        username : {
-            "name": name,
-            "role": role,
-            "password": org_password,
-            "others": others
-        }
-    }
+def add_account(new_users):
+    return accounts_db.insert_acc(new_users)
 
-    if accounts_db.insert_acc(new_user) == "":
-        return True
-    else:
-        return False
-
-def update_account(username, name, role, org_password, others = "none"):
-    updated_user = {
-        username : {
-            "name": name,
-            "role": role,
-            "password": org_password,
-            "others": others
-        }
-    }
-
-    if accounts_db.update_acc(updated_user) == "":
-        return True
-    else:
-        return False
+def update_account(updated_user):
+    return accounts_db.update_acc(updated_user)
 
 def load_account(username):
     acc_infor = accounts_db.load_acc(username)
@@ -103,11 +94,8 @@ def load_account(username):
 
     return username, name, role, password, org_password
 
-def delete_account(username):
-    if accounts_db.delete_acc(username):
-        return True
-    else:
-        return False
+def delete_account(del_users):
+    return accounts_db.delete_acc(del_users)
 
 def load_accounts():
     usernames, names, roles, passwords, org_passwords, cookie_name, cookie_key, cookie_value, cookie_expiry_days = accounts_db.load_accs()
@@ -118,3 +106,7 @@ def generate_random_string(length=10):
     all_characters = string.ascii_letters + string.digits + string.punctuation 
     random_string = ''.join(random.choice(all_characters) for _ in range(length)) 
     return random_string
+
+
+if __name__ == "__main__":
+    print(import_users('data.csv'))

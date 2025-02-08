@@ -32,3 +32,4 @@ semanticRouter = SemanticRouter(modelEmbeding, routes=[specialRoute, chitchatRou
 vector_store = FAISSDatabase(modelEmbeding, FAISS_PATH)
 rag = FAISSRag(vector_store)
 histories = []
+queries = {}

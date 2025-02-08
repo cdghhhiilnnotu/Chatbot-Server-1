@@ -9,16 +9,12 @@ def converse(query: str) -> str:
     global histories
 
     global sub_chain
-    history = histories[-1]
-    print(history)
     guidedRoute = semanticRouter.guide(query)[1]
     if guidedRoute == 'specials':
         print("Sử dụng RAG")
 
         rag_context = rag.to_text(query)
         context = f"""
-Đây là lịch sử cuộc trò chuyện:
-{history}
 Với các thông tin sau (nếu có):
 {rag_context}
 Hãy trả lời câu hỏi:
@@ -29,8 +25,6 @@ Hãy trả lời câu hỏi:
         print("Sử dụng LLM.")
 
         context = f"""
-Đây là lịch sử cuộc trò chuyện:
-{history}
 Hãy nhớ nó và trả lời câu hỏi:
 {query}
 """

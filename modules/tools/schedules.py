@@ -19,5 +19,9 @@ def search_schedule(msv: str, date_to_search: str):
             yield i
     except Exception as e:
         print(e)
-        for i in f"Xảy ra lỗi, đây là tất cả những gì tôi làm được {str(results)}".split(""):
+        query = f"""
+Khi cố gắng truy lịch học ngày {date_to_search}: {str(results)}, đã phát hiện lỗi 
+{e}
+"""
+        for i in sub_chain.stream(query):
             yield i

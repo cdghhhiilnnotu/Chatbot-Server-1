@@ -1,18 +1,16 @@
 from langchain_core.tools import tool
+from datetime import datetime
+import pytz
+from processing import sub_chain
 
 @tool
-def add(first: float, second: float) -> float:
-    # "Add two integers."
-    "Cộng 2 số thực"
-    for i in str(first + second):
+def time_now():
+    "Truy vấn thời gian hiện tại"
+    vn_timezone = pytz.timezone("Asia/Ho_Chi_Minh")  # Múi giờ Việt Nam
+    vn_time = datetime.now(vn_timezone)
+    current_time = vn_time.strftime("%Y-%m-%d %H:%M:%S")
+    for i in sub_chain.stream(f"Trả lời truy vấn về thời gian hiện tại: {current_time}"):
         yield i 
 
-@tool
-def multiply(first: float, second: float) -> float:
-    # """Multiply two integers together."""
-    "Nhân 2 số thực"
-    for i in str(first + second):
-        yield i 
-
-function_tools = [add, multiply]
+function_tools = [time_now]
 

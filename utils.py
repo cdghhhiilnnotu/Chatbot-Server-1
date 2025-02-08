@@ -48,6 +48,11 @@ def load_chats(username):
             json.dump(data, file, indent=4, ensure_ascii=False)
     return data
 
+def load_query(queries, key_query):
+    if key_query in queries:
+        return queries.pop(key_query)
+    return None
+
 
 if __name__ == "__main__":
     print(load_chats('2051010032'))
