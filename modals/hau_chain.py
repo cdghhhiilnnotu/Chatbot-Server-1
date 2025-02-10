@@ -46,9 +46,10 @@ class HauChain:
             context = f"""
 Với các thông tin sau (nếu có):
 {rag_context}
-Hãy xem lịch sử trò chuyện:
+Và lịch sử trò chuyện:
 {self.histories}
-Sau đó, phân tích kỹ xem người dùng muốn hỏi gì, sử dụng các công cụ bạn có và trả lời câu hỏi đó.
+Hãy trả lời câu hỏi:
+{query}
     """
             for i in self.sub_chain.stream(context):
                 yield i
@@ -56,9 +57,10 @@ Sau đó, phân tích kỹ xem người dùng muốn hỏi gì, sử dụng các
             print("2-Sử dụng LLM.")
 
             context = f"""
-Hãy xem lịch sử trò chuyện:
+Với lịch sử trò chuyện:
 {self.histories}
-Sau đó, phân tích kỹ xem người dùng muốn hỏi gì, sử dụng các công cụ bạn có và trả lời câu hỏi đó.
+Hãy trả lời câu hỏi:
+{query}
 """         
             print(context)
             print(self.sub_chain)
@@ -175,7 +177,7 @@ Sử dụng các công cụ sau đây:
 Bắt buộc phải trả về dưới dạng JSON với
 - key 'name' là tên công cụ cần sử dụng
 - value 'arguments' là 1 dictionary các tham số đầu vào của công cụ đó theo thứ tự được định nghĩa trong công cụ.
-Đọc kỹ hướng dẫn sử dụng các công cụ để trả về dạng JSON phù hợp
+Đọc kỹ hướng dẫn sử dụng các công cụ để đưa câu trả lời về dạng JSON phù hợp
 """
         # print(main_system)
         main_prompt = ChatPromptTemplate.from_messages(
@@ -202,18 +204,20 @@ Không được trả về câu trả lời rỗng.
         # Load the chat history from the JSON file
         chats = HAUChat.from_json(chat_id=self.chat_id, json_path=f'{CHATS_PATH}/{self.user_id}.json')
 
+        self.histories = chats.messages
         chats.add_message(sender="User", content=content)
         response = ""
-        self.histories = chats.messages
         query = f"""
 Hãy xem lịch sử trò chuyện:
 {self.histories}
-Hãy trả lời câu hỏi cuối của người dùng một cách ngắn gọn nhất có thể.
+Hãy trả lời câu hỏi:
+{content}
+Hãy trả lời câu hỏi ngắn nhất có thể.
 """
         try:
             select_function = self.main_chain.invoke(query)
             if select_function['name'] == "converse":
-                for i in self.converse(select_function['arguments'][list(select_function['arguments'].keys())[0]]):
+                for i in self.converse(content):
                     response += i
                     yield i
             if select_function['name'] == "course_fix":
@@ -241,7 +245,7 @@ Hãy trả lời câu hỏi cuối của người dùng một cách ngắn gọn
                     response += i
                     yield i
         except OutputParserException as e:
-            for i in self.converse(query):
+            for i in self.converse(content):
                 response += i
                 yield i
         except Exception as e:
