@@ -176,16 +176,6 @@ Bắt buộc phải trả về dưới dạng JSON với
 - key 'name' là tên công cụ cần sử dụng
 - value 'arguments' là 1 dictionary các tham số đầu vào của công cụ đó theo thứ tự được định nghĩa trong công cụ.
 Đọc kỹ hướng dẫn sử dụng các công cụ để trả về dạng JSON phù hợp
-Cụ thể:
-- Công cụ course_fix, course_cancel cần người dùng xác nhận yêu cầu trước khi thực hiện
-- Nếu người dùng không xác nhận yêu cầu, sẽ sử dụng công cụ hủy yêu cầu "name":"reset_query":
-    - "arguments" : "input": "course_fix" nếu là yêu cầu thay đổi, đăng ký học phần
-    - "arguments" : "input": "course_cancel" nếu là yêu cầu thay đổi, đăng ký học phần
-- Nếu người dùng xác nhận yêu cầu:
-    - Sẽ sử dụng công cụ "course_fix" khi đăng kí, thay đổi học phần
-    - Sẽ sử dụng công cụ "course_cancel" khi hủy học phần
-- Nếu người dùng yêu cầu thay đổi hoặc hủy học phần cho 1 mã sinh viên xác định, từ chối thực hiện hàm bằng công cụ "converse"
-- Khi các câu hỏi khó hiểu hoặc thiếu dữ liệu để sử dụng các công cụ khác sử dụng công cụ "converse"
 """
         # print(main_system)
         main_prompt = ChatPromptTemplate.from_messages(
@@ -218,7 +208,7 @@ Không được trả về câu trả lời rỗng.
         query = f"""
 Hãy xem lịch sử trò chuyện:
 {self.histories}
-và sử dụng nó để trả lời câu hỏi cuối của người dùng.
+Hãy trả lời câu hỏi cuối của người dùng một cách ngắn gọn nhất có thể.
 """
         try:
             select_function = self.main_chain.invoke(query)
