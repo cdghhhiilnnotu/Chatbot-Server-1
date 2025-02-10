@@ -13,3 +13,8 @@ CONFIG_USERS_PATH = "./database/yamls/users.yaml"
 SIDEBAR_IMG_PATH = "./assets/images/sidebar_logo.png"
 
 ACCOUNTS_PATH = "./database/jsons/accounts.json"
+
+MAIN_LLM = "qwen2.5"
+SUB_LLM = "llama3.1"
+
+EMBEDDING_MODEL = 'keepitreal/vietnamese-sbert'

@@ -1,31 +1,8 @@
 from langchain_core.tools import tool
-from processing import sub_chain, semanticRouter, rag, histories
 
 @tool
 def converse(query: str) -> str:
-    "Trả lời các câu hỏi thông thường."
-    global semanticRouter
-    global rag
-    global histories
-
-    global sub_chain
-    guidedRoute = semanticRouter.guide(query)[1]
-    if guidedRoute == 'specials':
-        print("Sử dụng RAG")
-
-        rag_context = rag.to_text(query)
-        context = f"""
-Với các thông tin sau (nếu có):
-{rag_context}
-Hãy trả lời câu hỏi:
-{query}
-"""
-        return sub_chain.stream(context)
-    else:
-        print("Sử dụng LLM.")
-
-        context = f"""
-Hãy nhớ nó và trả lời câu hỏi:
-{query}
-"""
-        return sub_chain.stream(context)
+    """
+    Công cụ sử dụng để trả lời các câu hỏi query thông thường.
+    """
+    return "converse"

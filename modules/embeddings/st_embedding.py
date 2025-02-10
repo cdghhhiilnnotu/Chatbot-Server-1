@@ -6,7 +6,7 @@ from sentence_transformers import SentenceTransformer
 
 from modules.embeddings import BaseEmbedding
 
-from utils import EMBEDDING_MODEL
+from modules.configs import EMBEDDING_MODEL
 
 class STEmbedding(BaseEmbedding):
 

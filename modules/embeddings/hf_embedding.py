@@ -7,7 +7,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 from modules.embeddings import BaseEmbedding
 
-from utils import EMBEDDING_MODEL
+from modules.configs import EMBEDDING_MODEL
 
 class HFEmbedding(BaseEmbedding):
 

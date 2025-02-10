@@ -1,17 +1,12 @@
 import yaml
 import json
 
-from modules.configs import CHATS_PATH, CONFIG_USERS_PATH, ACCOUNTS_PATH
+from modules.configs import CHATS_PATH, ACCOUNTS_PATH
 
-# with open(CONFIG_USERS_PATH, "r", encoding="utf-8") as file:
-#     accounts_data = yaml.safe_load(file)
 from modules.databases import HauAccDB
 
 accounts_db = HauAccDB()
 accounts_db.load_json([ACCOUNTS_PATH])
-
-LLM_NAME = 'llama3.2'
-EMBEDDING_MODEL = 'keepitreal/vietnamese-sbert'
 
 def get_history(history_messages):
     his = []

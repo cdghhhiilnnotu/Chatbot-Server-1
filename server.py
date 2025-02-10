@@ -9,6 +9,8 @@ app = FastAPI()
 @app.post("/response/{user_id}")
 async def response(user_id: str, data: dict = Body(...)):
     try:
+        # get_response(user_id, data)
+        # return StreamingResponse("oke")
         return StreamingResponse(get_response(user_id, data), media_type="text/plain; charset=utf-8")
     except FileNotFoundError:
         raise HTTPException(detail="File not found.", status_code=status.HTTP_404_NOT_FOUND)
