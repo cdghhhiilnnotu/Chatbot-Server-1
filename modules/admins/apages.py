@@ -56,7 +56,7 @@ def page_chats():
         st.warning("Không có lịch sử trò chuyện.")
 
 def page_knowledge():
-    st.header("Cập nhật kiến thức cho Chatbot")
+    st.header("Cập nhật dữ liệu cho Chatbot")
 
     uploaded_file = st.file_uploader("Tải lên tệp", type=['txt', 'pdf', 'html', 'docx'])
 
@@ -135,7 +135,7 @@ def page_knowledge():
             
             if st.session_state.updated_rag:
                 print("hello")
-                st.success("Cập nhật kiến thức thành công!")
+                st.success("Cập nhật dữ liệu thành công!")
                 time.sleep(3)
                 st.session_state.updated_rag = False
 
@@ -310,7 +310,7 @@ def page_admin():
         st.image(image, use_container_width=True)
         page = option_menu(
             menu_title=None,
-            options=["Lịch sử chat", "Cập nhật kiến thức", "Quyền truy cập"],
+            options=["Lịch sử chat", "Cập nhật dữ liệu", "Quyền truy cập"],
             icons=['clock-history', 'journal-plus', 'patch-check-fill'],
             styles={
                 "nav-link": {"font-size": "18px", "font-family": "'Source Sans Pro', sans-serif", "font-weight": "400", "font-style": "normal"},
@@ -320,7 +320,7 @@ def page_admin():
     
     if page == "Lịch sử chat":
         page_chats()
-    elif page == "Cập nhật kiến thức":
+    elif page == "Cập nhật dữ liệu":
         page_knowledge()
     elif page == "Quyền truy cập":
         page_access()

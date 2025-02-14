@@ -6,19 +6,20 @@ from modals import HauChain
 from modules.routers import SemanticRouter, Route, specials, chitchats
 from modules.rags import FAISSRag
 from modules.storings import FAISSDatabase
-from modules.embeddings import HFEmbedding
+from modules.embeddings import HFEmbedding, STEmbedding
 from modules.configs import FAISS_PATH, SUB_LLM, MAIN_LLM
 
 sub_model = OllamaLLM(model=SUB_LLM)
 main_model = OllamaLLM(model=MAIN_LLM)
 
-modelEmbeding = HFEmbedding()
+modelEmbedding = HFEmbedding()
+semanticEmbedding = STEmbedding()
 
 specialRoute = Route(name='specials', samples=specials)
 chitchatRoute = Route(name='chitchats', samples=chitchats)
-semantic_router = SemanticRouter(modelEmbeding, routes=[specialRoute, chitchatRoute])
+semantic_router = SemanticRouter(semanticEmbedding, routes=[specialRoute, chitchatRoute])
 
-vector_store = FAISSDatabase(modelEmbeding, FAISS_PATH)
+vector_store = FAISSDatabase(modelEmbedding, FAISS_PATH)
 rag = FAISSRag(vector_store)
 
 function_tools.append(converse)

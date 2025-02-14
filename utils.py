@@ -1,4 +1,4 @@
-import yaml
+import os
 import json
 
 from modules.configs import CHATS_PATH, ACCOUNTS_PATH
@@ -33,6 +33,7 @@ def load_account(username):
     return data
 
 def load_chats(username):
+    os.makedirs(CHATS_PATH, exist_ok=True)
     json_path = f"{CHATS_PATH}/{username}.json"
     try:
         with open(json_path, 'r', encoding='utf-8') as file:

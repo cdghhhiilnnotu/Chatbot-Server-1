@@ -17,4 +17,5 @@ ACCOUNTS_PATH = "./database/jsons/accounts.json"
 MAIN_LLM = "qwen2.5"
 SUB_LLM = "llama3.1"
 
-EMBEDDING_MODEL = 'keepitreal/vietnamese-sbert'
+HF_EMBEDDING = 'keepitreal/vietnamese-sbert'
+ST_EMBEDDING = 'sentence-transformers/all-MiniLM-L6-v2'
