@@ -100,7 +100,7 @@ Hãy trả lời câu hỏi:
                     yield i
         else:
             self.queries['course_fix'] = f"Thay đổi học phần có mã tín chỉ {maTC} vào thời khóa biểu của sinh viên có mã sinh viên {self.user_id}."
-            for i in self.sub_chain.stream("Thay đổi lịch học sẽ ảnh hưởng trực tiếp đến thời khóa biểu của bạn, hãy xác nhận rằng bạn muốn thực hiện nó"):
+            for i in self.sub_chain.stream("Thay đổi lịch học sẽ ảnh hưởng trực tiếp đến thời khóa biểu của sinh viên, hãy xác nhận rằng sinh viên muốn thực hiện nó"):
                 yield i
 
     def course_cancel(self, maTC: str):
@@ -122,7 +122,7 @@ Hãy trả lời câu hỏi:
                     yield i
         else:
             self.queries['course_cancel'] = f"Hủy học phần có mã tín chỉ {maTC} vào thời khóa biểu của sinh viên có mã sinh viên {self.user_id}."
-            for i in self.sub_chain.stream("Thay đổi lịch học sẽ ảnh hưởng trực tiếp đến thời khóa biểu của bạn, hãy xác nhận rằng bạn muốn thực hiện nó"):
+            for i in self.sub_chain.stream("Thay đổi lịch học sẽ ảnh hưởng trực tiếp đến thời khóa biểu của sinh viên, hãy xác nhận rằng sinh viên muốn thực hiện nó"):
                 yield i
 
     def search_exams(self, date_to_search: str):
