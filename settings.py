@@ -1,7 +1,7 @@
 from langchain_ollama import OllamaLLM
 
 from modules.function_calls import function_tools
-from modules.tools import converse, course_fix, course_cancel, search_schedule, search_exams, reset_query
+from modules.tools import converse, course_fix, course_cancel, search_schedule, search_exams, reset_query, current_time
 from modals import HauChain
 from modules.routers import SemanticRouter, Route, specials, chitchats
 from modules.rags import FAISSRag
@@ -28,6 +28,7 @@ function_tools.append(course_cancel)
 function_tools.append(search_schedule)
 function_tools.append(search_exams)
 function_tools.append(reset_query)
+function_tools.append(current_time)
 
 chains = {}
 
