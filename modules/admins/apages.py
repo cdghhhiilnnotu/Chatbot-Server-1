@@ -150,16 +150,16 @@ def page_account(username):
     
     with st.form("infor",clear_on_submit=True):
         st.markdown(f'<p style="font-size:20px; font-weight:bold;">{username}</p>', unsafe_allow_html=True)
-        name = st.text_input("Họ và tên", placeholder=f"{name}")
-        password = st.text_input("Mật khẩu", type="password", placeholder=f"{password}")
+        name_box = st.text_input("Họ và tên", placeholder=f"{name}")
+        password_box = st.text_input("Mật khẩu", type="password", placeholder=f"{password}")
         role = st.selectbox("Quyền truy cập",roles, index=role_index)
         modify_clicked = st.form_submit_button("Lưu")
     
         if modify_clicked:
             if modify_clicked:
-                if name == "":
+                if name_box == "":
                     name = name
-                if password == "":
+                if password_box == "":
                     password = password
                 updated_user = {
                     username : {

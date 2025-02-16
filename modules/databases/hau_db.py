@@ -42,7 +42,6 @@ class HauAccDB(BaseDB):
 
         return status_str
     
-
     def load_acc(self, username: str):
         if username not in self.data['credentials']['usernames'].keys():
             print(f"Key {username} does NOT exist.")
@@ -87,6 +86,7 @@ class HauAccDB(BaseDB):
         for acc in accs:
             if acc in self.data['credentials']['usernames'].keys():
                 self.data['credentials']['usernames'][acc] = accs[acc]
+                print(self.data['credentials']['usernames'][acc])
             else:
                 status_str.append( f"Tên tài khoản {acc} không tồn tại." + "\n")
                 continue

@@ -19,7 +19,9 @@ def get_history(history_messages):
 
 def load_account(username):
     try:
+        accounts_db.load_json([ACCOUNTS_PATH])
         acc_infor = accounts_db.load_acc(username)
+
         data = {
             'username' : username,
             'name' : acc_infor['name'],
