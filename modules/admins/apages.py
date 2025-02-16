@@ -158,14 +158,14 @@ def page_account(username):
         if modify_clicked:
             if modify_clicked:
                 if name_box == "":
-                    name = name
+                    name_box = name
                 if password_box == "":
-                    password = password
+                    password_box = password
                 updated_user = {
                     username : {
-                        "name": name,
+                        "name": name_box,
                         "role": role,
-                        "password": password,
+                        "password": password_box,
                         "others": "none"
                     }
                 }
