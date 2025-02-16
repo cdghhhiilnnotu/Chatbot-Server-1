@@ -8,20 +8,20 @@ credentials:
     admin1:
       name: Quản trị viên 1
       password: adminchatbot1
-      password: $2b$12$B8GuTfM9eS.CVc4nlSnUv.dGcr7wT3Q2g.bzDqfYHF5EHs5WCewS6
+      hash_password: $2b$12$B8GuTfM9eS.CVc4nlSnUv.dGcr7wT3Q2g.bzDqfYHF5EHs5WCewS6
       role: Admin
     admin2:
       name: Quản trị viên 2
       password: adminchatbot2
-      password: $2b$12$sL4aYDiICr1IfRE5yXPgue2nOXfZcv34fOfi4h//S8u33xgS9R8zG
+      hash_password: $2b$12$sL4aYDiICr1IfRE5yXPgue2nOXfZcv34fOfi4h//S8u33xgS9R8zG
       role: Admin
     viewer1:
       name: Người xem 1
       password: chat1
-      password: $2b$12$hzc1QLvhWkN.2G8x/s6/yuIqSK8r/FIdbKYlMQGe2t2wYQf3a/JMO
+      hash_password: $2b$12$hzc1QLvhWkN.2G8x/s6/yuIqSK8r/FIdbKYlMQGe2t2wYQf3a/JMO
       role: Viewer
     viewer2:
       name: Người xem 2
       password: chatbot2
-      password: $2b$12$0uTYawGzMB5e0RXIHEQiwuMrnctOSo8mY31Aosswm0gDa9OnJ87Ay
+      hash_password: $2b$12$0uTYawGzMB5e0RXIHEQiwuMrnctOSo8mY31Aosswm0gDa9OnJ87Ay
       role: Viewer
