@@ -156,10 +156,25 @@ def page_account(username):
         modify_clicked = st.form_submit_button("Lưu")
     
         if modify_clicked:
-            if update_account(username, name, role, password):
-                st.success("Thay đổi thành công")
-            else:
-                st.error("Đã xảy ra lỗi")
+            if modify_clicked:
+                if name == "":
+                    name = name
+                if password == "":
+                    password = password
+                updated_user = {
+                    username : {
+                        "name": name,
+                        "role": role,
+                        "password": password,
+                        "others": "none"
+                    }
+                }
+                status_add = update_account(updated_user)
+                if len(status_add) == 0:
+                    st.success("Thay đổi thành công")
+                else:
+                    for add_e in status_add:
+                        st.error(add_e)
 
 def page_access():
     reset_state()
