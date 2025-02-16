@@ -1,1 +1,47 @@
-{"cookie": {"expiry_days": 30, "key": "#-hY)ouWmK", "name": "hau_chatbot", "value": 505132}, "credentials": {"usernames": {"admin1": {"name": "Quản trị viên 1", "password": "adminchatbot1", "hash_password": "$2b$12$EpsjUy8kjv6E5ZGO7qvRCeqS.5NhZJpPg1ychFWyTaq9zgQlXtQEu", "role": "Admin", "others": "none"}, "admin2": {"name": "Quản trị viên 2", "password": "adminchatbot2", "hash_password": "$2b$12$SH8dprkC9fOiblMOEwf7hOwG1f1PV2MZJX1coQzpjU/ZK5kPXfGLa", "role": "Admin", "others": "none"}, "viewer1": {"name": "Người xem 1", "role": "Viewer", "password": "123", "others": "none", "hash_password": "$2b$12$FEkuZ1LpP0NdpG4AQJTJl.aIQBmMg.EUi0/d6j3vreXlk2jUz9JJi"}, "2055010051": {"name": "", "role": "Viewer", "password": "123", "others": "none", "hash_password": "$2b$12$.aFIWYFlB2JNoL312glRZudvO0A4GP2pzmvBiKwARp8mLkxwVjInq"}, "2055010153": {"name": "Dương Khánh Linh", "password": "linh1", "hash_password": "$2b$12$S73CZrNsEOZQJ292A.O6xOvEl3vq/Ltx/F45BTfwDWmzXUBwoEx5S", "role": "Viewer", "others": {"tie": "20", "class": "20CN3", "drl": "3.5"}}}}}
+{
+    "cookie": {
+        "expiry_days": 30,
+        "key": "at#y,>]nuz",
+        "name": "hau_chatbot",
+        "value": 505132
+    },
+    "credentials": {
+        "usernames": {
+            "admin1": {
+                "name": "Quản trị viên 1",
+                "password": "adminchatbot1",
+                "hash_password": "$2b$12$oHqgakjs7thXmL..GGvatuRNOk7TG0U22AyQNX.VYEedLnUp1ZzkO",
+                "role": "Admin",
+                "others": "none"
+            },
+            "admin2": {
+                "name": "Quản trị viên 2",
+                "password": "adminchatbot2",
+                "hash_password": "$2b$12$wEfy7jIf9MzCZy1mHDZGK.Cc3pK.XXnBHXj4GZdm9oAozfdQHcGqq",
+                "role": "Admin",
+                "others": "none"
+            },
+            "viewer1": {
+                "name": "Người xem 1",
+                "role": "Viewer",
+                "password": "123",
+                "others": "none",
+                "hash_password": "$2b$12$2u6LVvcVgmJO1atgjaddVuMOPg4.iRTUvQu3usq8i9mfzFw5WVZrG"
+            },
+            "2055010051": {
+                "name": "Nguyễn Thành Dương",
+                "role": "Viewer",
+                "password": "duong1",
+                "others": "none",
+                "hash_password": "$2b$12$MNAFqNaYC5Gm3JiHnWpCquYkpvNwppOcxciKwGgam65FGHsqFC7Q."
+            },
+            "2055010153": {
+                "name": "Dương Khánh Linh",
+                "password": "linh1",
+                "hash_password": "$2b$12$mJxkp8xNLKOjBrVDzc5L0e5OHcBRm2oJFQ87YMa9rMHdcrSevnGHO",
+                "role": "Viewer",
+                "others": "none"
+            }
+        }
+    }
+}

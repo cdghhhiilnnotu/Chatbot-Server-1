@@ -65,9 +65,9 @@ def import_users(csv_file):
     users = {}
     for item in data:
         users[item[list(item.keys())[1]]] = {
-            "name": item[list(item.keys())[0]],
-            "password": item[list(item.keys())[2]],
-            "role": item[list(item.keys())[3]],
+            "name": str(item[list(item.keys())[0]]),
+            "password": str(item[list(item.keys())[2]]),
+            "role": str(item[list(item.keys())[3]]),
             "others": "none"
         }
     return users
