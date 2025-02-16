@@ -2,6 +2,7 @@ YAML_PATH = "./database/yamls"
 
 ACTIVE_COURSES_PATH = "./database/active_courses"
 CHATS_PATH = "./database/chats"
+RECORDS_PATH = "./database/records"
 EXAMS_PATH = "./database/exams"
 SCHEDULES_PATH = "./database/schedules"
 FAISS_PATH = "./database/faiss/v0"
