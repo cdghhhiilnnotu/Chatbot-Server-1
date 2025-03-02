@@ -1,51 +1,53 @@
 # Chatbot Server
 
-Dự án này là máy chủ chatbot được xây dựng bằng Node.js và tích hợp với Ollama để cung cấp khả năng trò chuyện thông minh. Nó được thiết kế để hoạt động cùng với ứng dụng chatbot client.
+This project is a chatbot server built with Node.js and integrated with Ollama to provide intelligent chat capabilities. It is designed to work in conjunction with a chatbot client application.
 
-## Tính năng
+## Features
 
-* Cung cấp API cho ứng dụng chatbot client để tương tác với chatbot.
-* Tích hợp với Ollama để xử lý các yêu cầu trò chuyện.
-* Giao diện web trực quan được xây dựng bằng Streamlit.
+* Provides an API for the chatbot client application to interact with the chatbot.
+* Integrates with Ollama for processing chat requests.
+* Intuitive web interface built with Streamlit.
 
-## Cài đặt
+## Installation
 
-1.  **Yêu cầu**:
-    * Python (phiên bản 3.10)
-    * conda (Miniconda hoặc Anaconda)
+1.  **Requirements**:
+    * Python (version 3.10)
+    * conda (Miniconda or Anaconda)
     * pip (Python package installer)
-    * Ollama (đã cài đặt và cấu hình)
-2.  **Tạo môi trường conda**:
+    * Ollama (installed and configured)
+2.  **Create conda environment**:
 
     ```bash
     conda create -n server-env python=3.10
     conda activate server-env
     ```
-3.  **Cài đặt ffmpeg**:
+3.  **Install ffmpeg**:
+
     ```bash
     conda install conda-forge::ffmpeg
     ```
-4.  **Cài đặt các gói Python**:
+4.  **Install Python packages**:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-5.  **Cài đặt Ollama**:
-    * Đảm bảo rằng bạn đã cài đặt và cấu hình Ollama theo hướng dẫn của nhà phát triển Ollama.
-6.  **Chạy server**:
+5.  **Install Ollama**:
+    * Ensure you have installed and configured Ollama according to the Ollama developer's instructions.
+6.  **Run server**:
 
     ```bash
     python server.py
     ```
-7.  **Chạy giao diện web**:
+7.  **Run web interface**:
+
     ```bash
     streamlit run app.py
     ```
 
-## Lưu ý
+## Notes
 
-* Đảm bảo rằng Ollama đang chạy trước khi khởi động máy chủ chatbot.
-* Bạn có thể tùy chỉnh các cài đặt của máy chủ trong tệp `server.py`.
-* Tệp `requirements.txt` chứa danh sách các gói Python cần thiết.
-* Tệp `app.py` chứa mã nguồn giao diện web.
+* Ensure that Ollama is running before starting the chatbot server.
+* You can customize the server settings in the `server.py` file.
+* The `requirements.txt` file contains a list of required Python packages.
+* The `app.py` file contains the source code for the web interface.
