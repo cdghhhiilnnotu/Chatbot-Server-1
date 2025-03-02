@@ -7,11 +7,11 @@ from langchain_huggingface import HuggingFaceEmbeddings
 
 from modules.embeddings import BaseEmbedding
 
-from utils import EMBEDDING_MODEL
+from modules.configs import HF_EMBEDDING
 
 class HFEmbedding(BaseEmbedding):
 
-    def __init__(self, model_name: str =EMBEDDING_MODEL):
+    def __init__(self, model_name: str =HF_EMBEDDING):
         super().__init__('HuggingFace')
         self.core = HuggingFaceEmbeddings(model_name=model_name)
 

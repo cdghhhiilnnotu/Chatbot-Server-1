@@ -3,3 +3,4 @@ from modals.hau_user import *
 from modals.hau_chats import *
 from modals.hau_schedules import *
 from modals.utils import *
+from modals.hau_chain import *

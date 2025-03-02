@@ -1,13 +1,12 @@
-import yaml
+import os
 import json
 
-from modules.configs import CHATS_PATH, CONFIG_USERS_PATH
+from modules.configs import CHATS_PATH, ACCOUNTS_PATH
 
-with open(CONFIG_USERS_PATH, "r", encoding="utf-8") as file:
-    accounts_data = yaml.safe_load(file)
+from modules.databases import HauAccDB
 
-LLM_NAME = 'llama3.2'
-EMBEDDING_MODEL = 'keepitreal/vietnamese-sbert'
+accounts_db = HauAccDB()
+accounts_db.load_json([ACCOUNTS_PATH])
 
 def get_history(history_messages):
     his = []
@@ -19,19 +18,15 @@ def get_history(history_messages):
     return his
 
 def load_account(username):
-    users = accounts_data['usernames']
-
     try:
-        user_infor = users[username]
-        name = user_infor['name']
-        password = user_infor['password']
-        others = user_infor['others']
+        accounts_db.load_json([ACCOUNTS_PATH])
+        acc_infor = accounts_db.load_acc(username)
 
         data = {
-            'username': username,
-            'name': name,
-            'password': password,
-            'others': others,
+            'username' : username,
+            'name' : acc_infor['name'],
+            'password' : acc_infor['password'],
+            'others' : acc_infor['others']
         }
     except Exception as e:
         data = {
@@ -49,6 +44,12 @@ def load_chats(username):
         with open(json_path, 'w', encoding='utf-8') as file:
             json.dump(data, file, indent=4, ensure_ascii=False)
     return data
+
+def load_query(queries, key_query):
+    if key_query in queries:
+        return queries.pop(key_query)
+    return None
+
 
 if __name__ == "__main__":
     print(load_chats('2051010032'))

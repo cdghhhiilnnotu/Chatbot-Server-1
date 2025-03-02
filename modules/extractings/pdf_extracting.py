@@ -18,52 +18,38 @@ class PDFExtractor(BaseExtractor):
         super().__init__('PDFExtractor')
 
     def load(self, pdf_path):
-        # pdf_path = os.path.abspath(pdf_path)
-            doc = fitz.open(pdf_path)
-            pdf_text = ""
-            hyperlinks = []
-            
-            for page in doc:
-                pdf_text += page.get_text()
-                links = page.get_links()
-                if links:
-                    for link in links:
-                        if "uri" in link:
-                            hyperlinks.append(link["uri"])
-            
-            if not pdf_text.strip():
-                images = convert_from_path(pdf_path)
-                ocr_text = ""
-                for image in images:
-                    ocr_text += pytesseract.image_to_string(image, lang="vie")
-                pdf_text = ocr_text
-            
-            if not pdf_text.strip():
-                raise ValueError("No content found in the PDF.")
-            
-            document = Document(
-                page_content=pdf_text,
-                metadata={
-                    "source": pdf_path,
-                    "hyperlinks": hyperlinks,  
-                    "tables": [],  
-                    "error": ""
-                }
-            )
-            return document
-
-        # except Exception as e:
-        #     error_message = str(e)
-        #     print(f"Error processing {pdf_path}: {error_message}")
-        #     return Document(
-        #         page_content="",
-        #         metadata={
-        #             "source": pdf_path,
-        #             "hyperlinks": [],
-        #             "tables": [],
-        #             "error": error_message
-        #         }
-        #     )
+        doc = fitz.open(pdf_path)
+        pdf_text = ""
+        hyperlinks = []
+        
+        for page in doc:
+            pdf_text += page.get_text()
+            links = page.get_links()
+            if links:
+                for link in links:
+                    if "uri" in link:
+                        hyperlinks.append(link["uri"])
+        
+        if not pdf_text.strip():
+            images = convert_from_path(pdf_path)
+            ocr_text = ""
+            for image in images:
+                ocr_text += pytesseract.image_to_string(image, lang="vie")
+            pdf_text = ocr_text
+        
+        if not pdf_text.strip():
+            raise ValueError("No content found in the PDF.")
+        
+        document = Document(
+            page_content=pdf_text,
+            metadata={
+                "source": pdf_path,
+                "hyperlinks": hyperlinks,  
+                "tables": [],  
+                "error": ""
+            }
+        )
+        return document
 
     def loads(self, pdfs_dir):
         documents = []

@@ -25,13 +25,13 @@ def main():
         pass
 
     if authentication_status == False:
-        st.error("Username/Password is incorrect!")
+        st.error("Tài khoản/Mật khẩu sai!")
 
     if authentication_status:
         run_page(usernames[user_index], roles[user_index])
         authenticator.logout("Đăng xuất", "sidebar")
 
-    
+
 
 if __name__ == "__main__":
     main()

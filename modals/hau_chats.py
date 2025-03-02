@@ -2,6 +2,7 @@ import json
 import os
 from typing import List, Dict
 from datetime import datetime
+from modules.configs import CHATS_PATH
 
 class HAUChat:
     def __init__(self, chat_id: str = "", created_at: str = "", messages: List[Dict] = None):

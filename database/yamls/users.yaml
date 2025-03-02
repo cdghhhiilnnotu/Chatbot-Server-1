@@ -1,15 +1,26 @@
-usernames:
-  '2055010051':
-    name: Nguyễn Thành Dương
-    password: duong1
-    others: 
-      tie: '20'
-      class: 20CN3
-      drl: '3.5'
-  '2055010153':
-    name: Dương Khánh Linh
-    password: linh1
-    others: 
-      tie: '20'
-      class: 20CN3
-      drl: '3.5'
+cookie:
+  expiry_days: 30
+  key: 9)q6k<T}T[
+  name: hau_chatbot
+  value: 505132
+credentials:
+  usernames:
+    '2055010051':
+      name: Nguyễn Thành Dương
+      password: duong1
+      hash_password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
+      role: Viewer
+      others: 
+        tie: '20'
+        class: 20CN3
+        drl: '3.5'
+    '2055010153':
+      name: Dương Khánh Linh
+      password: linh1
+      hash_password: $2b$12$iTcVTZMTwdbETbkm6Me5xOV4Vxjkc4lCZRQv9/K1DxjqpL5nPZTZe
+      role: Viewer
+      others: 
+        tie: '20'
+        class: 20CN3
+        drl: '3.5'
+

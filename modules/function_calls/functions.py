@@ -1,18 +1,9 @@
 from langchain_core.tools import tool
 
 @tool
-def add(first: float, second: float) -> float:
-    # "Add two integers."
-    "Cộng 2 số thực"
-    for i in str(first + second):
-        yield i 
+def current_time():
+    "Truy vấn thời gian hiện tại"
+    return "current_time"
 
-@tool
-def multiply(first: float, second: float) -> float:
-    # """Multiply two integers together."""
-    "Nhân 2 số thực"
-    for i in str(first + second):
-        yield i 
-
-function_tools = [add, multiply]
+function_tools = [current_time]
 

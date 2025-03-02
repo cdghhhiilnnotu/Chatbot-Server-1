@@ -3,14 +3,16 @@ import json
 import streamlit as st
 from datetime import datetime
 import yaml
+import pandas as pd
 import random
 import streamlit_authenticator as stauth
 import string
 
-from modules.configs import CHATS_PATH, CONFIG_ADMINS_PATH
+from modules.configs import CHATS_PATH, CONFIG_ADMINS_PATH, ACCOUNTS_PATH
+from modules.databases import HauAccDB
 
-with open(CONFIG_ADMINS_PATH, "r", encoding="utf-8") as file:
-    accounts_data = yaml.safe_load(file)
+accounts_db = HauAccDB()
+accounts_db.load_json([ACCOUNTS_PATH])
 
 def load_chat_history(folder_path=CHATS_PATH):
     try:
@@ -54,7 +56,21 @@ def filter_chats_by_date(chat_data, start_date, end_date):
 def reset_state():
     st.session_state.chunks = []
     st.session_state.delete_index = None
-    st.session_state.updated_rag = True
+    # st.session_state.updated_rag = False
+
+def import_users(csv_file):
+    df = pd.read_csv(csv_file, encoding='utf-8')
+    data = df.to_json(orient="records", force_ascii=False)
+    data = json.loads(data)
+    users = {}
+    for item in data:
+        users[item[list(item.keys())[1]]] = {
+            "name": str(item[list(item.keys())[0]]),
+            "password": str(item[list(item.keys())[2]]),
+            "role": str(item[list(item.keys())[3]]),
+            "others": "none"
+        }
+    return users
 
 def setup_state():
     if "chunks" not in st.session_state:
@@ -66,79 +82,23 @@ def setup_state():
     if "updated_rag" not in st.session_state:
         st.session_state.updated_rag = False
 
-def add_account(username, name, role, org_password):
-    new_user = {
-        "name": name,
-        "role": role,
-        "org_password": org_password,
-        "password": "",
-    }
+def add_account(new_users):
+    return accounts_db.insert_acc(new_users)
 
-    if username not in accounts_data["credentials"]["usernames"]:
-        accounts_data["credentials"]["usernames"][username] = new_user
-
-        update_yaml()
-        return True
-    else:
-        return False
-    
-def update_yaml():
-    credentials = accounts_data['credentials']['usernames']
-    usernames = list(credentials.keys())
-    names = [info['name'] for info in credentials.values()]
-    roles = [info['role'] for info in credentials.values()]
-    org_passwords = [info['org_password'] for info in credentials.values()]
-
-    cookie = accounts_data['cookie']
-    accounts_data['cookie']['key'] = generate_random_string()
-
-    passwords = stauth.Hasher(org_passwords).generate()
-    for username, new_password in zip(usernames, passwords):
-        credentials[username]['password'] = new_password
-
-    with open(CONFIG_ADMINS_PATH, 'w', encoding='utf-8') as file:
-        yaml.dump(accounts_data, file, default_flow_style=False, allow_unicode=True)
-
-def update_account(username, name, role, org_password):
-    updated_user = {
-        "name": name,
-        "role": role,
-        "org_password": org_password,
-        "password": "",
-    }
-
-    if username in accounts_data["credentials"]["usernames"] or username.lower() == "none":
-        accounts_data["credentials"]["usernames"][username] = updated_user
-
-        update_yaml()
-        return True
-    else:
-        return False
+def update_account(updated_user):
+    return accounts_db.update_acc(updated_user)
 
 def load_account(username):
-    usernames = accounts_data['credentials']['usernames']
-    username_infor = usernames[username]
-    name = username_infor['name']
-    role = username_infor['role']
-    org_password = username_infor['org_password']
-    password = username_infor['password']
+    acc_infor = accounts_db.load_acc(username)
+    username, name, role, password, org_password = username, acc_infor['name'], acc_infor['role'], acc_infor['hash_password'], acc_infor['password']
 
     return username, name, role, password, org_password
 
-def load_accounts():
-    update_yaml()
-    credentials = accounts_data['credentials']['usernames']
-    usernames = list(credentials.keys())
-    names = [info['name'] for info in credentials.values()]
-    roles = [info['role'] for info in credentials.values()]
-    org_passwords = [info['org_password'] for info in credentials.values()]
-    passwords = [info['password'] for info in credentials.values()]
+def delete_account(del_users):
+    return accounts_db.delete_acc(del_users)
 
-    cookie = accounts_data['cookie']
-    cookie_name = cookie['name']
-    cookie_key = cookie['key']
-    cookie_value = cookie['value']
-    cookie_expiry_days = cookie['expiry_days']
+def load_accounts():
+    usernames, names, roles, passwords, org_passwords, cookie_name, cookie_key, cookie_value, cookie_expiry_days = accounts_db.load_accs()
 
     return usernames, names, roles, passwords, org_passwords, cookie_name, cookie_key, cookie_value, cookie_expiry_days
 
@@ -146,3 +106,7 @@ def generate_random_string(length=10):
     all_characters = string.ascii_letters + string.digits + string.punctuation 
     random_string = ''.join(random.choice(all_characters) for _ in range(length)) 
     return random_string
+
+
+if __name__ == "__main__":
+    print(import_users('data.csv'))

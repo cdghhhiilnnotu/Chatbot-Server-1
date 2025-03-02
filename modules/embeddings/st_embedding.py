@@ -6,11 +6,11 @@ from sentence_transformers import SentenceTransformer
 
 from modules.embeddings import BaseEmbedding
 
-from utils import EMBEDDING_MODEL
+from modules.configs import ST_EMBEDDING
 
 class STEmbedding(BaseEmbedding):
 
-    def __init__(self, model_name: str = EMBEDDING_MODEL):
+    def __init__(self, model_name: str = ST_EMBEDDING):
         super().__init__('SentenceTransformer')
         self.core = SentenceTransformer(model_name)
 

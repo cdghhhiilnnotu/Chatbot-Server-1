@@ -49,6 +49,8 @@ class FAISSDatabase(BaseDatabase):
     def db_add(self, docs):
         ids = [len(self.db.index_to_docstore_id) + i for i in range(len(docs))]
         self.db.add_documents(documents=docs, ids=ids)
+        self.db.save_local(self.db_path)
+        print(f"Database saved in {self.db_path}")
 
     def db_len(self):
         return len(self.db.index_to_docstore_id)
